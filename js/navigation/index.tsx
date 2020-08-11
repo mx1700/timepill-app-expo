@@ -34,9 +34,9 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-        <Stack.Screen name="User" component={UserScreen} options={{ title: 'My home' }} initialParams={{id: "0"}}/>
-        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen name="Root" component={BottomTabNavigator} options={{headerShown: false}}/>
+      <Stack.Screen name="User" component={UserScreen} options={{title: 'My home'}} initialParams={{id: "0"}}/>
+      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
     </Stack.Navigator>
   );
 }
