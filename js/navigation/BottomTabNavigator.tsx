@@ -64,7 +64,7 @@ function HomeNavigator() {
             <HomeStack.Screen
                 name="HomeScreen"
                 component={HomeScreen}
-                options={{headerTitle: 'Tab One Title'}}
+                options={{headerTitle: '首页'}}
             />
         </HomeStack.Navigator>
     );

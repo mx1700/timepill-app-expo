@@ -28,14 +28,15 @@ const Stack = createStackNavigator<RootStackParamList>();
 /**
  * 根导航器,需要注册所有页面到这里
  * 且页面名称需要添加到 RootStackParamList 内
+ * 且在 LinkingConfiguration 内注册路由
  * @constructor
  */
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Screen name="User" component={UserScreen} options={{ title: 'My home' }}/>
+    <Stack.Navigator>
+      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+        <Stack.Screen name="User" component={UserScreen} options={{ title: 'My home' }} initialParams={{id: "0"}}/>
+        <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
 }

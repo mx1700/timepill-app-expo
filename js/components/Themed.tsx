@@ -9,13 +9,11 @@ export function useThemeColor(
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark
 ) {
   const theme = useColorScheme();
-  // @ts-ignore
   const colorFromProps = props[theme];
 
   if (colorFromProps) {
     return colorFromProps;
   } else {
-    // @ts-ignore
     return Colors[theme][colorName];
   }
 }
