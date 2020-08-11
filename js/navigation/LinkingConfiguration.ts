@@ -25,6 +25,8 @@ export default {
         },
       },
       User: 'users',
+      Login: 'login',
+
       NotFound: '*',
     },
   },

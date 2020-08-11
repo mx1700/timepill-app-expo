@@ -8,6 +8,10 @@ import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import UserScreen from "../screens/UserScreen";
+// @ts-ignore
+import LoginScreen from "../screens/LoginScreen"
+// @ts-ignore
+import AuthScreen from "../screens/AuthScreen"
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -34,6 +38,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="Login" component={AuthScreen} options={{headerShown: false}}/>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{headerShown: false}}/>
       <Stack.Screen name="User" component={UserScreen} options={{title: 'My home'}} initialParams={{id: "0"}}/>
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>

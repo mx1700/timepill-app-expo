@@ -4,7 +4,8 @@
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
-  User: { id: String } ;
+  User: { id: String };
+  Login: undefined;
 };
 
 /**
