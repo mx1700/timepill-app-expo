@@ -14,13 +14,19 @@ const OS = Device.osName;
 const OS_VERSION = Device.osVersion;
 // const DEVICE_ID = Device.modelId();
 // const VERSION = DeviceInfo.getVersion();
+const DEVICE_ID = '';  //todo:临时
+const VERSION = 30;    //todo:临时
 //
 // const IS_IPHONEX = isIphoneX();
 
-
-const baseUrl = 'https://open.timepill.net/api';
-const v2Url = 'https://v2.timepill.net/api';
-
+let baseUrl, v2Url;
+if(!__DEV__) {
+    baseUrl = 'https://open.timepill.net/api';
+    v2Url = 'https://v2.timepill.net/api';
+} else {
+    baseUrl = '/api_1';
+    v2Url = '/api_2';
+}
 
 async function login(username, password) {
     const token = Token.generateToken(username, password);
@@ -479,13 +485,14 @@ async function checkStatus(response) {
         try {
             errInfo = await response.json();
             console.log(errInfo);
-
         } catch (err) {
             errInfo = {
                 code: 0,
-                message: '服务器开小差了 :('
+                message: '服务器开小差了 :(',
             }
         }
+
+        errInfo.status_code = response.status;
 
         let error = new Error(errInfo.message, errInfo.code ? errInfo.code : errInfo.status_code);
         error.code = errInfo.code ? errInfo.code : errInfo.status_code;
@@ -528,8 +535,8 @@ export default {
     DEVICE_WINDOW,
     OS,
     OS_VERSION,
-    // DEVICE_ID,
-    // VERSION,
+    DEVICE_ID,
+    VERSION,
     // IS_IPHONEX,
 
     login,
