@@ -5,7 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
-import { AuthContext } from './util/AuthContext'
+import AuthContext from './util/AuthContext'
 
 // Before rendering any navigation stack
 import { enableScreens } from 'react-native-screens';

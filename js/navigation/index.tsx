@@ -15,7 +15,7 @@ import AuthScreen from "../screens/AuthScreen"
 import {useContext, useState} from "react";
 // @ts-ignore
 import Token from '../util/token'
-import {AuthContext} from "../util/AuthContext";
+import AuthContext from "../util/AuthContext";
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started

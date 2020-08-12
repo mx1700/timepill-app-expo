@@ -16,7 +16,7 @@ import Loading from '../../components/Loading';
 import LoginForm from './loginForm';
 import RegisterEmailForm from './registerEmailForm';
 import RegisterMobileForm from './registerMobileForm';
-import {AuthContext} from "../../util/AuthContext";
+import AuthContext from "../../util/AuthContext";
 
 
 export default class App extends Component {
