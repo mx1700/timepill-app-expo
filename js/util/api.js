@@ -2,6 +2,7 @@ import {Platform, Dimensions} from 'react-native'
 // import DeviceInfo from 'react-native-device-info';
 // import {isIphoneX} from 'react-native-iphone-x-helper'
 import * as Device from 'expo-device';
+import Constants from 'expo-constants';
 
 import Token from './token'
 
@@ -12,10 +13,9 @@ const DEVICE_WINDOW = Dimensions.get('window')
 
 const OS = Device.osName;
 const OS_VERSION = Device.osVersion;
-// const DEVICE_ID = Device.modelId();
-// const VERSION = DeviceInfo.getVersion();
-const DEVICE_ID = '';  //todo:临时
-const VERSION = 30;    //todo:临时
+const DEVICE_ID = Constants.deviceId;
+const VERSION = Constants.nativeBuildVersion;
+// console.log(Constants)
 //
 // const IS_IPHONEX = isIphoneX();
 
