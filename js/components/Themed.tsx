@@ -42,10 +42,16 @@ export function View(props: ViewProps) {
 }
 
 export function Input(props: ThemeProps & DefaultInput['props']) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+  const { style, lightColor, darkColor, inputStyle, containerStyle, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
-  return <DefaultInput style={style} inputStyle={{color:color}} {...otherProps} />;
+  return (<DefaultInput
+    style={style}
+    inputStyle={[{color:color},inputStyle]}
+    errorStyle={{display:"none"}}
+    containerStyle={[{marginBottom: 10},containerStyle]}
+    {...otherProps}
+  />);
 }
 
 export function Button(props: ThemeProps & DefaultButton['props']) {
@@ -54,6 +60,7 @@ export function Button(props: ThemeProps & DefaultButton['props']) {
 
   return (<DefaultButton
     style={style}
-    buttonStyle={[{backgroundColor:color, borderRadius: 999}, buttonStyle]}
-    {...otherProps} />);
+    buttonStyle={[{backgroundColor:color, borderRadius: 999, padding: 10, marginHorizontal: 8}, buttonStyle]}
+    {...otherProps}
+  />);
 }

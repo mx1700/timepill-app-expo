@@ -110,7 +110,7 @@ export default class LoginForm extends Component {
                 />
             </View>
 
-            <Button title={'登录'}
+            <Button title='登录'
                 onPress={this._clickLogin.bind(this)}
             />
         </View>
