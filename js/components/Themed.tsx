@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Text as DefaultText, View as DefaultView } from 'react-native';
+import { Input as DefaultInput, Button as DefaultButton } from "react-native-elements";
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -38,4 +39,21 @@ export function View(props: ViewProps) {
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
   return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
+}
+
+export function Input(props: ThemeProps & DefaultInput['props']) {
+  const { style, lightColor, darkColor, ...otherProps } = props;
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+
+  return <DefaultInput style={style} inputStyle={{color:color}} {...otherProps} />;
+}
+
+export function Button(props: ThemeProps & DefaultButton['props']) {
+  const { style, lightColor, darkColor, buttonStyle, ...otherProps } = props;
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'primary');
+
+  return (<DefaultButton
+    style={style}
+    buttonStyle={[{backgroundColor:color, borderRadius: 999}, buttonStyle]}
+    {...otherProps} />);
 }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, InteractionManager, Alert} from 'react-native';
-import {Input as FormInput, Button} from "react-native-elements";
+import {Platform, StyleSheet, InteractionManager, Alert} from 'react-native';
+import { Text, View, Input, Button } from '../../components/Themed';
 
 import Color from '../../constants/Colors';
 // import Api from '../util/api';
@@ -112,7 +112,7 @@ export default class RegisterMobileForm extends Component {
             <Text style={localStyle.title}>{'注册胶囊日记账号'}</Text>
 
             <View style={localStyle.form}>
-                <FormInput
+                <Input
 
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
@@ -132,7 +132,7 @@ export default class RegisterMobileForm extends Component {
                 />
 
                 <View style={{flexDirection:"row"}}>
-                    <FormInput ref='inputMobile'
+                    <Input ref='inputMobile'
                         containerStyle={{flex: 1}}
                         underlineColorAndroid='transparent'
                         selectionColor={Color.primary}
@@ -156,8 +156,6 @@ export default class RegisterMobileForm extends Component {
                         disabled={this.state.mobileSendTime > 0}
 
                         large={false}
-                        borderRadius={999}
-                        backgroundColor={Color.primary}
                         style={{marginBottom: 0, marginTop:5, marginRight:5, marginLeft:5}}
                         buttonStyle={Platform.OS === 'ios' ? {
                             paddingVertical:8,
@@ -169,7 +167,7 @@ export default class RegisterMobileForm extends Component {
                         onPress={this.requestCode.bind(this)}
                     />
                 </View>
-                <FormInput ref='inputCode'
+                <Input ref='inputCode'
                     underlineColorAndroid='transparent'
                     selectionColor={Color.primary}
 
@@ -188,7 +186,7 @@ export default class RegisterMobileForm extends Component {
                     onSubmitEditing={() => {}}
                 />
 
-                <FormInput ref='registerMobilePw'
+                <Input ref='registerMobilePw'
 
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
@@ -207,8 +205,7 @@ export default class RegisterMobileForm extends Component {
                 />
             </View>
 
-            <Button borderRadius={999} title={'注册'}
-                backgroundColor={Color.primary}
+            <Button title={'注册'}
                 onPress={this._clickRegister.bind(this)}
             />
         </View>
@@ -219,7 +216,6 @@ const localStyle = StyleSheet.create({
     title: {
         fontSize: 26,
         paddingBottom: 35,
-        color: '#222',
         textAlign: 'center'
     },
     form: {

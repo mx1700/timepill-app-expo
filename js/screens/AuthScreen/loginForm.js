@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, InteractionManager, Alert} from 'react-native';
-import {Input as FormInput, Button} from "react-native-elements";
+import {StyleSheet, InteractionManager, Alert} from 'react-native';
+import { Text, View, Input, Button } from '../../components/Themed';
 
 import Color from '../../constants/Colors';
 // import Api from '../util/api';
@@ -73,7 +73,7 @@ export default class LoginForm extends Component {
             <Text style={localStyle.title}>{'欢迎来到胶囊日记'}</Text>
 
             <View style={localStyle.form}>
-                <FormInput ref="loginUsername"
+                <Input ref="loginUsername"
 
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
@@ -92,7 +92,7 @@ export default class LoginForm extends Component {
                     onSubmitEditing={() => {}}
                 />
 
-                <FormInput ref="loginPw"
+                <Input ref="loginPw"
 
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
@@ -111,7 +111,7 @@ export default class LoginForm extends Component {
                 />
             </View>
 
-            <Button borderRadius={999} title={'登录'} backgroundColor={Color.primary}
+            <Button title={'登录'}
                 onPress={this._clickLogin.bind(this)}
             />
         </View>
@@ -122,7 +122,6 @@ const localStyle = StyleSheet.create({
     title: {
         fontSize: 26,
         paddingBottom: 35,
-        color: '#222',
         textAlign: 'center'
     },
     form: {

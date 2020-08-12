@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {
     StyleSheet,
-    Text,
-    View,
     TouchableOpacity,
     Keyboard,
     Animated,
@@ -10,6 +8,7 @@ import {
     InteractionManager,
     Linking
 } from 'react-native';
+import { Text, View } from '../../components/Themed';
 
 import Color from '../../constants/Colors';
 // import Api from './src/util/api';
@@ -146,28 +145,6 @@ export default class App extends Component {
                     </Text>
                 </TouchableOpacity>
             );
-        } else if(this.state.page === App.pageRegisterMobile) {
-            return (
-                <TouchableOpacity onPress={() => {
-                    LayoutAnimation.easeInEaseOut();
-                    this.setState({page: App.pageRegisterEmail});
-                }}>
-                    <Text style={localStyle.bottomText}>
-                        邮箱注册
-                    </Text>
-                </TouchableOpacity>
-            );
-        } else if(this.state.page === App.pageRegisterEmail){
-            return (
-                <TouchableOpacity onPress={() => {
-                    LayoutAnimation.easeInEaseOut();
-                    this.setState({page: App.pageRegisterMobile});
-                }}>
-                    <Text style={localStyle.bottomText}>
-                        手机注册
-                    </Text>
-                </TouchableOpacity>
-            );
         }
 
         return null;
@@ -177,7 +154,6 @@ export default class App extends Component {
 const localStyle = StyleSheet.create({
     wrap: {
         flex: 1,
-        backgroundColor: 'white'
     },
     content: {
         flex: 1,
@@ -191,7 +167,7 @@ const localStyle = StyleSheet.create({
     },
     bottomText: {
         fontSize: 14,
-        color: Color.primary,
+        // color: Color.primary,
         padding: 10
     },
     modal: {

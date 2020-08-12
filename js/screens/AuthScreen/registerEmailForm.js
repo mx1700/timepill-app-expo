@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, InteractionManager, Alert} from 'react-native';
-import {Input as FormInput, Button} from "react-native-elements";
+import {StyleSheet, InteractionManager, Alert} from 'react-native';
+import { Text, View, Input, Button } from '../../components/Themed';
 
 import Color from '../../constants/Colors';
 // import Api from '../util/api';
@@ -78,7 +78,7 @@ export default class RegisterEmailForm extends Component {
             <Text style={localStyle.title}>{'注册胶囊日记账号'}</Text>
 
             <View style={localStyle.form}>
-                <FormInput
+                <Input
 
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
@@ -97,7 +97,7 @@ export default class RegisterEmailForm extends Component {
                     onSubmitEditing={() => {}}
                 />
 
-                <FormInput ref='inputEmail'
+                <Input ref='inputEmail'
 
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
@@ -116,7 +116,7 @@ export default class RegisterEmailForm extends Component {
                     onSubmitEditing={() => {}}
                 />
 
-                <FormInput ref='registerEmailPw'
+                <Input ref='registerEmailPw'
 
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
@@ -147,7 +147,6 @@ const localStyle = StyleSheet.create({
     title: {
         fontSize: 26,
         paddingBottom: 35,
-        color: '#222',
         textAlign: 'center'
     },
     form: {
