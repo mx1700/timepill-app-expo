@@ -97,8 +97,7 @@ export default class RegisterEmailForm extends Component {
                     onSubmitEditing={() => {}}
                 />
 
-                <Input ref='inputEmail'
-
+                <Input
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
                     keyboardType='email-address'
@@ -116,8 +115,7 @@ export default class RegisterEmailForm extends Component {
                     onSubmitEditing={() => {}}
                 />
 
-                <Input ref='registerEmailPw'
-
+                <Input
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
 

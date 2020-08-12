@@ -10,10 +10,9 @@ import {
 } from 'react-native';
 import { Text, View } from '../../components/Themed';
 
-import Color from '../../constants/Colors';
-// import Api from './src/util/api';
+import Api from '../../util/api';
 
-import Loading from '../../components/loading';
+import Loading from '../../components/Loading';
 import LoginForm from './loginForm';
 import RegisterEmailForm from './registerEmailForm';
 import RegisterMobileForm from './registerMobileForm';
@@ -33,7 +32,7 @@ export default class App extends Component {
         });
     }
 
-    componentWillMount () {
+    componentDidMount() {
         // this.keyboardDidShowListener =
         //     Keyboard.addListener(Api.IS_IOS ? 'keyboardWillShow' : 'keyboardDidShow', this._keyboardDidShow);
         // this.keyboardDidHideListener =
@@ -114,7 +113,7 @@ export default class App extends Component {
                 />
             );
 
-        } else if(this.state.page == App.pageRegisterMobile) {
+        } else if(this.state.page === App.pageRegisterMobile) {
             return (
                 <RegisterMobileForm
                     setLoading={this._setLoading.bind(this)}
@@ -122,7 +121,7 @@ export default class App extends Component {
                 />
             );
 
-        } else if(this.state.page == App.pageRegisterEmail) {
+        } else if(this.state.page === App.pageRegisterEmail) {
             return (
                 <RegisterEmailForm
                     setLoading={this._setLoading.bind(this)}
@@ -138,7 +137,7 @@ export default class App extends Component {
         if(this.state.page === App.pageLogin) {
             return (
                 <TouchableOpacity onPress={() => {
-                    Linking.openURL("https://timepill.net/home/forgot_password");
+                    Linking.openURL("https://timepill.net/home/forgot_password").done();
                 }}>
                     <Text style={localStyle.bottomText}>
                         忘记密码？

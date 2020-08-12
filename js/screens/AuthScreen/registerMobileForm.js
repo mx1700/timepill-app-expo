@@ -113,7 +113,6 @@ export default class RegisterMobileForm extends Component {
 
             <View style={localStyle.form}>
                 <Input
-
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
                     keyboardType='email-address'
@@ -132,7 +131,7 @@ export default class RegisterMobileForm extends Component {
                 />
 
                 <View style={{flexDirection:"row"}}>
-                    <Input ref='inputMobile'
+                    <Input
                         containerStyle={{flex: 1}}
                         underlineColorAndroid='transparent'
                         selectionColor={Color.primary}
@@ -167,7 +166,7 @@ export default class RegisterMobileForm extends Component {
                         onPress={this.requestCode.bind(this)}
                     />
                 </View>
-                <Input ref='inputCode'
+                <Input
                     underlineColorAndroid='transparent'
                     selectionColor={Color.primary}
 
@@ -186,8 +185,7 @@ export default class RegisterMobileForm extends Component {
                     onSubmitEditing={() => {}}
                 />
 
-                <Input ref='registerMobilePw'
-
+                <Input
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
 

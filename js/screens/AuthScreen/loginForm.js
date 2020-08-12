@@ -3,8 +3,8 @@ import {StyleSheet, InteractionManager, Alert} from 'react-native';
 import { Text, View, Input, Button } from '../../components/Themed';
 
 import Color from '../../constants/Colors';
-// import Api from '../util/api';
-// import Msg from '../util/msg';
+import Api from '../../util/api';
+import Msg from '../../util/msg';
 
 
 export default class LoginForm extends Component {
@@ -39,6 +39,7 @@ export default class LoginForm extends Component {
                 this.props.onLoginSucc();
 
             } else {
+                alert(result.errMsg)
                 Alert.alert(
                     result.errMsg,
                     '',
@@ -73,8 +74,7 @@ export default class LoginForm extends Component {
             <Text style={localStyle.title}>{'欢迎来到胶囊日记'}</Text>
 
             <View style={localStyle.form}>
-                <Input ref="loginUsername"
-
+                <Input
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
                     keyboardType='email-address'
@@ -92,8 +92,7 @@ export default class LoginForm extends Component {
                     onSubmitEditing={() => {}}
                 />
 
-                <Input ref="loginPw"
-
+                <Input
                     selectionColor={Color.primary}
                     underlineColorAndroid='transparent'
 
