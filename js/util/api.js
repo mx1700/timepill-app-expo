@@ -1,17 +1,18 @@
 import {Platform, Dimensions} from 'react-native'
 // import DeviceInfo from 'react-native-device-info';
 // import {isIphoneX} from 'react-native-iphone-x-helper'
+import * as Device from 'expo-device';
 
 import Token from './token'
 
 
-const IS_ANDROID = Platform.OS === 'android';
-const IS_IOS = Platform.OS === 'ios';
+const IS_ANDROID = Device.osName === 'Android';
+const IS_IOS = Device.osName === 'iOS';
 const DEVICE_WINDOW = Dimensions.get('window')
 
-// const OS = DeviceInfo.getSystemName();
-// const OS_VERSION = DeviceInfo.getSystemVersion();
-// const DEVICE_ID = DeviceInfo.getUniqueID();
+const OS = Device.osName;
+const OS_VERSION = Device.osVersion;
+// const DEVICE_ID = Device.modelId();
 // const VERSION = DeviceInfo.getVersion();
 //
 // const IS_IPHONEX = isIphoneX();
@@ -527,9 +528,9 @@ export default {
     DEVICE_WINDOW,
     OS,
     OS_VERSION,
-    DEVICE_ID,
-    VERSION,
-    IS_IPHONEX,
+    // DEVICE_ID,
+    // VERSION,
+    // IS_IPHONEX,
 
     login,
     logout,

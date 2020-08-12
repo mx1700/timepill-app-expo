@@ -1,11 +1,9 @@
 import AsyncStorage from '@react-native-community/async-storage';
-var base64 = require('base-64');
-
 
 class Token {
 
     generateToken(username, password) {
-        return 'Basic ' + base64.encode(username + ":" + password);
+        return 'Basic ' + btoa(username + ":" + password);
     }
 
 
@@ -91,14 +89,13 @@ class Token {
     async getSettings() {
         let str = await this.get('setting');
         let setting = str && str.length > 0 ? JSON.parse(str) : {};
-        
+
         if (settings['pushMessage'] === undefined) {
             settings['pushMessage'] = true;
         }
 
         return settings;
     }
-
 }
 
 export default new Token()
