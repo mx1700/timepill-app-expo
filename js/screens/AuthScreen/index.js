@@ -16,9 +16,12 @@ import Loading from '../../components/Loading';
 import LoginForm from './loginForm';
 import RegisterEmailForm from './registerEmailForm';
 import RegisterMobileForm from './registerMobileForm';
+import {AuthContext} from "../../util/AuthContext";
 
 
 export default class App extends Component {
+
+    static contextType = AuthContext;
 
     constructor(props) {
         super(props);
@@ -72,7 +75,7 @@ export default class App extends Component {
     }
 
     _onSucc() {
-        // Navigation.setRoot(BottomNav.config());
+        this.context.setLogin(true)
     }
 
     render() {

@@ -2,10 +2,13 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
+// @ts-ignore
+import Token from '../util/token'
+import {Dispatch, SetStateAction} from "react";
 
-export default function useCachedResources() {
+export default function useCachedResources(): [boolean, boolean, Dispatch<SetStateAction<Boolean>>] {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
-
+  const [isLogin, setLogin] = React.useState(false);
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
@@ -17,6 +20,8 @@ export default function useCachedResources() {
           ...Ionicons.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
         });
+        const token = await Token.getUserToken()
+        setLogin(!!token);
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         console.warn(e);
@@ -29,5 +34,5 @@ export default function useCachedResources() {
     loadResourcesAndDataAsync();
   }, []);
 
-  return isLoadingComplete;
+  return [isLoadingComplete, isLogin, setLogin];
 }

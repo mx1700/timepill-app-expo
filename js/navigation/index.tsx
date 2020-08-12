@@ -12,6 +12,10 @@ import UserScreen from "../screens/UserScreen";
 import LoginScreen from "../screens/LoginScreen"
 // @ts-ignore
 import AuthScreen from "../screens/AuthScreen"
+import {useContext, useState} from "react";
+// @ts-ignore
+import Token from '../util/token'
+import {AuthContext} from "../util/AuthContext";
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -36,12 +40,18 @@ const Stack = createStackNavigator<RootStackParamList>();
  * @constructor
  */
 function RootNavigator() {
+  const authContext = useContext(AuthContext)
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={AuthScreen} options={{headerShown: false}}/>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{headerShown: false}}/>
-      <Stack.Screen name="User" component={UserScreen} options={{title: 'My home'}} initialParams={{id: "0"}}/>
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
+      {authContext.isLogin ? (
+        <>
+          <Stack.Screen name="Root" component={BottomTabNavigator} options={{headerShown: false}}/>
+          <Stack.Screen name="User" component={UserScreen} options={{title: 'My home'}} initialParams={{id: "0"}}/>
+          <Stack.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
+        </>
+      ):(
+        <Stack.Screen name="Login" component={AuthScreen} options={{headerShown: false}}/>
+      )}
     </Stack.Navigator>
   );
 }

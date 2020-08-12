@@ -37,7 +37,6 @@ export default class LoginForm extends Component {
         InteractionManager.runAfterInteractions(() => {
             if(result.isLoginSucc) {
                 this.props.onLoginSucc();
-
             } else {
                 alert(result.errMsg)
                 Alert.alert(
