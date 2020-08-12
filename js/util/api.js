@@ -9,6 +9,7 @@ import Token from './token'
 
 const IS_ANDROID = Device.osName === 'Android';
 const IS_IOS = Device.osName === 'iOS';
+const IS_WEB = !!Constants.platform.web
 const DEVICE_WINDOW = Dimensions.get('window')
 
 const OS = Device.osName;
