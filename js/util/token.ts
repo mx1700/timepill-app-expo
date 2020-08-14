@@ -1,22 +1,24 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
 class Token {
+    private token: string|null = null;
+    private user: any;
 
-    generateToken(username, password) {
+    generateToken(username: string, password: string) {
         return 'Basic ' + btoa(username + ":" + password);
     }
 
 
-    async set(key, value) {
+    async set(key: string, value: string) {
         await AsyncStorage.setItem(key, value);
     }
 
-    async get(key) {
+    async get(key: string) {
         return await AsyncStorage.getItem(key);
     }
 
 
-    async setUserToken(token) {
+    async setUserToken(token: string) {
         await this.set('user_token', token);
         this.token = token;
     }
@@ -29,20 +31,24 @@ class Token {
         return this.token;
     }
 
-    async setUserInfo(user) {
+    async setUserInfo(user: any) {
         await this.set('user_info', JSON.stringify(user));
         this.user = user;
     }
 
     async getUserInfo() {
         if (!this.user) {
-            this.user = JSON.parse(await this.get('user_info'));
+            const s = await this.get('user_info');
+            if(!s) {
+                return null;
+            }
+            this.user = JSON.parse(s);
         }
 
         return this.user;
     }
 
-    async setLoginPassword(password) {
+    async setLoginPassword(password: string) {
         this.set('login_password', password);
     }
 
@@ -50,45 +56,48 @@ class Token {
         return await this.get('login_password');
     }
 
-    async setUpdateVersion(version) {
+    async setUpdateVersion(version: string) {
         this.set('update_version', JSON.stringify(version));
     }
 
     async getUpdateVersion() {
-        return JSON.parse(await this.get('update_version'));
+        const s = await this.get('update_version');
+        return s ? JSON.parse(s) : 0;
     }
 
-    async setDraft(content) {
+    async setDraft(content: any) {
         this.set('draft', JSON.stringify(content));
     }
 
     async getDraft() {
-        return JSON.parse(await this.get('draft'));
+        const s = await this.get('draft');
+        return s ? JSON.parse(s) : null;
     }
 
-    async setTempDraft(content) {
+    async setTempDraft(content: string) {
         this.set('temp_draft', JSON.stringify(content));
     }
 
     async getTempDraft() {
-        return JSON.parse(await this.get('temp_draft'));
+        const s = await this.get('temp_draft');
+        return s ? JSON.parse(s) : null;
     }
 
-    async setSetting(name, value) {
+    async setSetting(name: string, value: any) {
         let settings = await this.getSettings();
         settings[name] = value;
 
         this.set('setting', JSON.stringify(settings));
     }
 
-    async getSetting(name) {
+    async getSetting(name: string) {
         const settings = await this.getSettings();
         return settings ? (settings[name]) : null;
     }
 
     async getSettings() {
         let str = await this.get('setting');
-        let setting = str && str.length > 0 ? JSON.parse(str) : {};
+        let settings = str && str.length > 0 ? JSON.parse(str) : {};
 
         if (settings['pushMessage'] === undefined) {
             settings['pushMessage'] = true;
