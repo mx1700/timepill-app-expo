@@ -29,7 +29,7 @@ const localStyle = StyleSheet.create({
         width: 160,
         height: 160,
         marginTop: 15,
-        backgroundColor: '#000',
+        backgroundColor: '#BDBDBD',
         padding: 0,
         borderRadius: 5
     },
