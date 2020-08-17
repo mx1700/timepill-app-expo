@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Text as DefaultText, View as DefaultView } from 'react-native';
+import { Text as DefaultText, View as DefaultView, ActivityIndicator as DefaultActivityIndicator } from 'react-native';
 import { Input as DefaultInput, Button as DefaultButton } from "react-native-elements";
+import { Ionicons as DefaultIonicons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+import {IconProps} from "@expo/vector-icons/build/createIconSet";
 
 export function useThemeColor(
   props: { light?: string; dark?: string },
@@ -63,4 +65,16 @@ export function Button(props: ThemeProps & DefaultButton['props']) {
     buttonStyle={[{backgroundColor:color, borderRadius: 999, padding: 10, marginHorizontal: 8}, buttonStyle]}
     {...otherProps}
   />);
+}
+
+export function Ionicons(props: ThemeProps & IconProps<string>) {
+  const { lightColor, darkColor, ...otherProps } = props;
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'primary');
+  return (<DefaultIonicons color={color} {...otherProps} />)
+}
+
+export function ActivityIndicator(props: ThemeProps & DefaultActivityIndicator['props']) {
+  const { lightColor, darkColor, ...otherProps } = props;
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'primary');
+  return (<DefaultActivityIndicator color={color} {...otherProps}/>);
 }
