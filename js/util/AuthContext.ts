@@ -2,7 +2,7 @@ import React from 'react';
 
 const AuthContext = React.createContext({
     isLogin: false,
-    setLogin: (success: Boolean) => {},
+    setLogin: (success: boolean) => {},
 });
 
 export default AuthContext
