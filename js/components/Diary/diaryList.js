@@ -4,8 +4,7 @@ import {
     StyleSheet,
     FlatList,
 } from 'react-native';
-import {Divider} from "react-native-elements";
-import {View, Text, Button} from '../Themed';
+import {View, Text, Button, Divider} from '../Themed';
 
 import {
     ListFooterLoading,
@@ -246,7 +245,7 @@ export default class DiaryList extends Component {
                         )
                     }}
 
-                    ItemSeparatorComponent={({highlighted}) => <Divider style={{backgroundColor: '#eee', height: StyleSheet.hairlineWidth}}/>}
+                    ItemSeparatorComponent={({highlighted}) => <Divider style={{height: StyleSheet.hairlineWidth}}/>}
                     
                     ListHeaderComponent={this.props.listHeader}
 

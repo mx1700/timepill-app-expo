@@ -12,6 +12,8 @@ export default {
 
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
+
+    divider: '#eee',
   },
   dark: {
     text: '#ddd',
@@ -23,5 +25,7 @@ export default {
 
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
+
+    divider: '#444',
   },
 };
