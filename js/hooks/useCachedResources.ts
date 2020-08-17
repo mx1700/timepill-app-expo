@@ -6,7 +6,7 @@ import * as React from 'react';
 import Token from '../util/token'
 import {Dispatch, SetStateAction} from "react";
 
-export default function useCachedResources(): [boolean, boolean, Dispatch<SetStateAction<Boolean>>] {
+export default function useCachedResources(): [boolean, boolean, Dispatch<SetStateAction<boolean>>] {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [isLogin, setLogin] = React.useState(false);
   // Load any resources or data that we need prior to rendering the app
