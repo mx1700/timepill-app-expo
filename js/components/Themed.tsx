@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Text as DefaultText, View as DefaultView, ActivityIndicator as DefaultActivityIndicator } from 'react-native';
 import { Input as DefaultInput, Button as DefaultButton } from "react-native-elements";
-import { Ionicons as DefaultIonicons } from '@expo/vector-icons';
+import { Ionicons as DefaultIonicons,  } from '@expo/vector-icons';
+import { Fontisto as DefaultFontisto } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -68,9 +69,16 @@ export function Button(props: ThemeProps & DefaultButton['props']) {
 }
 
 export function Ionicons(props: ThemeProps & IconProps<string>) {
+  // return <DefaultIonicons name="md-checkmark-circle" size={32} color="green" />
   const { lightColor, darkColor, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'primary');
   return (<DefaultIonicons color={color} {...otherProps} />)
+}
+
+export function Fontisto(props: ThemeProps & IconProps<string>) {
+  const { lightColor, darkColor, ...otherProps } = props;
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'primary');
+  return (<DefaultFontisto color={color} {...otherProps} />)
 }
 
 export function ActivityIndicator(props: ThemeProps & DefaultActivityIndicator['props']) {

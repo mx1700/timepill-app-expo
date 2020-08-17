@@ -90,11 +90,13 @@ export default class HomePage extends Component {
             }, 2000);
         }
 
+
         //todo
         // this.blockUserListener = DeviceEventEmitter.addListener(Event.userBlocked, (param) => {
         //     this.diaryList.filter(param.blockUserId);
         // });
     }
+
 
     componentWillUnmount() {
         //todo
@@ -237,6 +239,7 @@ export default class HomePage extends Component {
             }
         });
     }
+
 
     render() {
         return (

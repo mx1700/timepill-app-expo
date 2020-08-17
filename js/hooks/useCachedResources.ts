@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Fontisto } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
@@ -16,8 +16,12 @@ export default function useCachedResources(): [boolean, boolean, Dispatch<SetSta
         SplashScreen.preventAutoHideAsync();
 
         // Load fonts
+        console.log({
+          ...Fontisto.font
+        })
         await Font.loadAsync({
           ...Ionicons.font,
+          ...Fontisto.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
         });
         const token = await Token.getUserToken()

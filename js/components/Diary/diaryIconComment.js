@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Image, TouchableOpacity} from 'react-native';
-import { Ionicons } from "../Themed";
-import {View, Text, Button} from '../Themed';
+import { View, Text, Ionicons, Fontisto } from "../Themed";
 import Color from '../../constants/Colors';
 
 export default class DiaryIconComment extends Component {
@@ -18,12 +17,15 @@ export default class DiaryIconComment extends Component {
     render() {
         return (
             <View style={localStyle.wrap}>
-                <Ionicons name="ios-text-outline"
-                          size={18}
-                          lightColor={Color.light.primary}
-                          darkColor={Color.dark.primary}
+                <Fontisto name="comment"
+                          size={14}
+                          lightColor={Color.light.secondaryText}
+                          darkColor={Color.dark.secondaryText}
                           style={localStyle.icon} />
-                <Text style={localStyle.text}>
+                <Text style={localStyle.text}
+                      lightColor={Color.light.secondaryText}
+                      darkColor={Color.dark.secondaryText}
+                >
                     {this.state.count > 0 ? this.state.count : ''}
                 </Text>
             </View>
@@ -39,10 +41,10 @@ const localStyle = StyleSheet.create({
     },
     icon: {
         marginLeft: 2,
-        marginRight: 4
+        marginRight: 4,
+        marginTop: 2,
     },
     text: {
         fontSize: 15,
-        color: Color.inactiveText
     }
 });
