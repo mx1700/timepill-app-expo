@@ -11,7 +11,7 @@ module.exports = async function (env, argv) {
           protocol: 'https:',
           port: 443,
         },
-        pathRewrite: {'^/api_2' : '/api'},
+        pathRewrite: {'^/api_1' : '/api'},
         secure: false,
         changeOrigin: true,
         logLevel: 'info',
