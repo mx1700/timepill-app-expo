@@ -247,7 +247,7 @@ class DiaryList extends Component {
                         ListHeaderComponent={this.props.listHeader}
 
                         ListFooterComponent={() => {
-                            if (this.state.refreshing || this.state.loadingMore || this.state.diaries.length == 0) {
+                            if (this.state.refreshing || this.state.diaries.length == 0) {
                                 return null;
                             }
 
@@ -265,7 +265,7 @@ class DiaryList extends Component {
                         refreshing={this.state.refreshing}
                         onRefresh={this.refresh.bind(this)}
 
-                        onEndReachedThreshold={2}
+                        onEndReachedThreshold={5}
                         onEndReached={this.state.hasMore ? this.loadMore.bind(this) : null}
 
                         onScroll={(event) => {
@@ -278,7 +278,7 @@ class DiaryList extends Component {
     }
 }
 
-export function TestTow(props) {
+export default function DiaryListWarp(props) {
     const navigation = useNavigation();
     return <DiaryList {...props} navigation={navigation} />;
 }

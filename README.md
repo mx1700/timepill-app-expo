@@ -24,4 +24,5 @@ yarn run
 1. https://github.com/expo/react-native-read-more-text
 
 ## 待解决问题
-1. 底部加载显示loading的问题
+- [x] 底部加载显示loading的问题
+- [ ] Web端跳转页面时，会加载更多，原因未知

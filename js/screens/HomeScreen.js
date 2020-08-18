@@ -41,11 +41,7 @@ import Api from '../util/api';
 import Event from '../util/event'
 import HomeDiaryData from '../dataLoader/homeDiaryData';
 
-import {TestTow as DiaryList} from '../components/diary/diaryList';
-// import {Test as DiaryList} from '../components/Test';
-// import {Test2 as DiaryList} from '../components/diary/Test2';
-// import {Test as DiaryList} from '../components/Diary/Test';
-// import {TestTow as DiaryList} from '../components/Diary/TestTWo';
+import DiaryList from '../components/Diary/diaryList';
 
 export default class HomePage extends Component {
 
