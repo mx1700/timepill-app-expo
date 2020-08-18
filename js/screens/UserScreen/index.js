@@ -10,6 +10,7 @@ import Event from "../../util/event";
 import Color from '../../constants/Colors';
 
 import UserIntro from './userIntro';
+import DiaryList from '../../components/diary/diaryList'
 // import UserDiaryData from '../dataLoader/userDiaryData';
 // import DiaryList from '../components/diary/diaryList';
 // import NotebookList from '../components/notebook/notebookList';
@@ -56,4 +57,14 @@ export function MyScreen() {
       </Tab.Navigator>
     );
     // return (<Text>login: {user.name}</Text>);
+}
+
+function MyDiaries() {
+    return (<DiaryList
+      {...this.props}
+
+      dataSource={this.dataSource}
+      showField={['subject', 'createdTime']}
+      isMine={!this.user}
+    />)
 }
