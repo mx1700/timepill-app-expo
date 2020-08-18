@@ -9,6 +9,8 @@ import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import UserScreen from "../screens/UserScreen";
 // @ts-ignore
+import DiaryScreen from "../screens/DiaryScreen";
+// @ts-ignore
 import LoginScreen from "../screens/LoginScreen"
 // @ts-ignore
 import AuthScreen from "../screens/AuthScreen"
@@ -47,6 +49,7 @@ function RootNavigator() {
         <>
           <Stack.Screen name="Root" component={BottomTabNavigator} options={{headerShown: false}}/>
           <Stack.Screen name="User" component={UserScreen} options={{title: 'My home'}} initialParams={{id: "0"}}/>
+          <Stack.Screen name="Diary" component={DiaryScreen} options={{title: 'Oops!'}}/>
           <Stack.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
         </>
       ):(

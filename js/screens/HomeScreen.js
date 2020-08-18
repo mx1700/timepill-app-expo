@@ -36,12 +36,16 @@ import {View, Text, Button} from '../components/Themed';
 
 import Color from '../constants/Colors'
 import Api from '../util/api';
+//todo
 // import Update from '../util/update';
 import Event from '../util/event'
-
-import DiaryList from '../components/diary/diaryList'
 import HomeDiaryData from '../dataLoader/homeDiaryData';
 
+import {TestTow as DiaryList} from '../components/diary/diaryList';
+// import {Test as DiaryList} from '../components/Test';
+// import {Test2 as DiaryList} from '../components/diary/Test2';
+// import {Test as DiaryList} from '../components/Diary/Test';
+// import {TestTow as DiaryList} from '../components/Diary/TestTWo';
 
 export default class HomePage extends Component {
 
@@ -56,7 +60,7 @@ export default class HomePage extends Component {
             showSplash: true,
             fadeInOpacity: new Animated.Value(0),
 
-            splashTime : 3,
+            splashTime: 3,
             splashImage: splash ? splash.image_url : null,
             splashLink: splash ? splash.link : null,
 
@@ -65,9 +69,8 @@ export default class HomePage extends Component {
     }
 
     componentDidMount() {
-        if(this.state.hasSplash) {
+        if (this.state.hasSplash) {
             this.openSplash();
-
         } else {
             this.closeSplash();
         }
@@ -83,7 +86,7 @@ export default class HomePage extends Component {
         //   }
         // );
 
-        if(Api.IS_ANDROID) {
+        if (Api.IS_ANDROID) {
             setTimeout(() => {
                 //todo
                 //Update.updateAndroid();
@@ -111,7 +114,7 @@ export default class HomePage extends Component {
                 splashTime: newTime
             });
 
-            if(newTime == 0) {
+            if (newTime === 0) {
                 this.closeSplash();
             }
 
@@ -125,14 +128,13 @@ export default class HomePage extends Component {
               toValue: 1,
               duration: 1000,
           }
-
         ).start(() => {
             this.startTimer();
         });
     }
 
     closeSplash() {
-        if(this.timer) {
+        if (this.timer) {
             clearTimeout(this.timer);
         }
 
@@ -142,7 +144,6 @@ export default class HomePage extends Component {
               toValue: 0,
               duration: 500,
           }
-
         ).start(() => {
 
             // Navigation.mergeOptions(this.props.componentId, {
@@ -168,8 +169,8 @@ export default class HomePage extends Component {
     }
 
     onSplashPress() {
-        if(this.state.splashLink) {
-            if(this.timer) {
+        if (this.state.splashLink) {
+            if (this.timer) {
                 clearTimeout(this.timer);
             }
 
@@ -212,7 +213,7 @@ export default class HomePage extends Component {
     refreshTopic() {
         Api.getTodayTopic()
           .then(topic => {
-              if(topic) {
+              if (topic) {
                   this.setState({topic});
               }
           })
@@ -244,19 +245,30 @@ export default class HomePage extends Component {
     render() {
         return (
           <View style={localStyle.wrap}>
-              {
-                  this.state.showSplash ? this.renderModal() : (
-                    <DiaryList ref={(r) => this.diaryList = r}
-                               dataSource={this.dataSource}
-                               listHeader={this.renderHeader.bind(this)}
-                               refreshHeader={this.refreshTopic.bind(this)}
-                               {...this.props}
-                    />
-                  )
-              }
-              {/*<ActionSheet/>*/}
+              <DiaryList ref={(r) => this.diaryList = r}
+                         dataSource={this.dataSource}
+                         listHeader={this.renderHeader.bind(this)}
+                         refreshHeader={this.refreshTopic.bind(this)}
+                         {...this.props}
+              />
           </View>
         );
+        //todo: Splash
+        // return (
+        //   <View style={localStyle.wrap}>
+        //       {
+        //           this.state.showSplash ? this.renderModal() : (
+        //             <DiaryList ref={(r) => this.diaryList = r}
+        //                        dataSource={this.dataSource}
+        //                        listHeader={this.renderHeader.bind(this)}
+        //                        refreshHeader={this.refreshTopic.bind(this)}
+        //                        {...this.props}
+        //             />
+        //           )
+        //       }
+        //       {/*<ActionSheet/>*/}
+        //   </View>
+        // );
     }
 
     renderHeader() {
@@ -277,8 +289,10 @@ export default class HomePage extends Component {
     renderModal() {
         return (
           <Modal visible={this.state.hasSplash}
-                 onShow={() => {}}
-                 onRequestClose={() => {}}
+                 onShow={() => {
+                 }}
+                 onRequestClose={() => {
+                 }}
           >
               <Animated.View style={{flex: 1, opacity: this.state.fadeInOpacity}}>
                   <TouchableWithoutFeedback style={{flex: 1}} onPress={this.onSplashPress.bind(this)}>

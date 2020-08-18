@@ -26,6 +26,7 @@ export default {
       },
       User: 'users',
       Login: 'login',
+      Diary: 'diary',
       NotFound: '*',
     },
   },
