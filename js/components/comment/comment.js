@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ActionSheet from 'react-native-actionsheet-api';
 import moment from 'moment';
 
-import Color from '../../style/color';
+import Color from '../../constants/Colors';
 import UserIcon from '../userIcon';
 
 
@@ -38,7 +37,7 @@ export default class Comment extends Component {
         return (
             <View style={bgActive}>
                 <View style={localStyle.box}>
-                    <UserIcon iconUrl={user.iconUrl} onPress={this.props.onUserIconPress}></UserIcon>
+                    <UserIcon iconUrl={user.iconUrl} onPress={this.props.onUserIconPress}/>
 
                     <View style={localStyle.body}>
                         <View style={localStyle.title}>

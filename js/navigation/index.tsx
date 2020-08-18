@@ -7,6 +7,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
+// @ts-ignore
 import UserScreen from "../screens/UserScreen";
 // @ts-ignore
 import DiaryScreen from "../screens/DiaryScreen";

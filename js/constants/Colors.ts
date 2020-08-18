@@ -5,7 +5,9 @@ export default {
   light: {
     text: '#333',
     secondaryText: '#9C9C9C',
+
     background: '#fff',
+    backgroundSelect: '#b6d8ff',
 
     tint: tintColorLight,
     primary: tintColorLight,
@@ -18,7 +20,9 @@ export default {
   dark: {
     text: '#ddd',
     secondaryText: '#9C9C9C',
+
     background: '#334',
+    backgroundSelect: '#b6d8ff',
 
     tint: tintColorDark,
     primary: tintColorLight,
