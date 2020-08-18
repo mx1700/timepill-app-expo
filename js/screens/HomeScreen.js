@@ -1,45 +1,383 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import {Button, Text, View} from '../components/Themed';
-import {useNavigation} from "@react-navigation/native";
-import {useEffect, useRef, useState} from "react";
+// import * as React from 'react';
+// import { StyleSheet } from 'react-native';
+// import { Text, View } from '../components/Themed';
+// import {useNavigation} from "@react-navigation/native";
+//
+// export default function HomeScreen(props) {
+//     const navigation = useNavigation();
+//     return (
+//         <View style={styles.container}>
+//             <Text>Home</Text>
+//         </View>
+//     );
+// }
+//
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//     },
+// });
 
-export default function HomeScreen(props) {
-    const navigation = useNavigation();
-    const [stop, setStop] = useState(false)
+import React, {Component} from 'react';
+import {
+    StyleSheet,
+    TouchableOpacity,
+    ImageBackground,
+    Animated,
+    Modal,
+    TouchableWithoutFeedback,
+    DeviceEventEmitter,
+} from 'react-native';
+import {View, Text, Button} from '../components/Themed';
+//todo
+// import ActionSheet from 'react-native-actionsheet-api';
 
-    return (
-        <View style={styles.container}>
-            <Text>Home</Text>
-            {stop ? null : <Counter/>}
-            <Button title={"STOP"} onPress={()=>setStop(true)}/>
-        </View>
-    );
-}
+import Color from '../constants/Colors'
+import Api from '../util/api';
+//todo
+// import Update from '../util/update';
+import Event from '../util/event'
+import HomeDiaryData from '../dataLoader/homeDiaryData';
 
-function Counter() {
-    const [counter, setCounter] = useState(0)
-    const counterRef = useRef(counter)
+import {TestTow as DiaryList} from '../components/diary/diaryList';
+// import {Test as DiaryList} from '../components/Test';
+// import {Test2 as DiaryList} from '../components/diary/Test2';
+// import {Test as DiaryList} from '../components/Diary/Test';
+// import {TestTow as DiaryList} from '../components/Diary/TestTWo';
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            counterRef.current++;
-            console.log("counter:" + counterRef.current)
-            setCounter(counterRef.current)
-        }, 500);
-        return () => {
-            clearInterval(timer)
-            console.log("clear timer!!!!!")
+export default class HomePage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.dataSource = new HomeDiaryData();
+
+        let splash = props.splash;
+        this.state = {
+            hasSplash: !!splash,
+
+            showSplash: true,
+            fadeInOpacity: new Animated.Value(0),
+
+            splashTime: 3,
+            splashImage: splash ? splash.image_url : null,
+            splashLink: splash ? splash.link : null,
+
+            topic: null
         }
-    },[])
+    }
 
-    return <Text>{counter}</Text>
+    componentDidMount() {
+        if (this.state.hasSplash) {
+            this.openSplash();
+        } else {
+            this.closeSplash();
+        }
+
+        //todo: 滚动到顶部
+        // this.bottomTabEventListener = Navigation.events().registerBottomTabSelectedListener(
+        //   ({ selectedTabIndex, unselectedTabIndex }) => {
+        //       if(selectedTabIndex == unselectedTabIndex && selectedTabIndex == 0) {
+        //           if(this.diaryList) {
+        //               this.diaryList.scrollToTop();
+        //           }
+        //       }
+        //   }
+        // );
+
+        if (Api.IS_ANDROID) {
+            setTimeout(() => {
+                //todo
+                //Update.updateAndroid();
+            }, 2000);
+        }
+
+
+        //todo
+        // this.blockUserListener = DeviceEventEmitter.addListener(Event.userBlocked, (param) => {
+        //     this.diaryList.filter(param.blockUserId);
+        // });
+    }
+
+
+    componentWillUnmount() {
+        //todo
+        // this.bottomTabEventListener.remove();
+        // this.blockUserListener.remove();
+    }
+
+    startTimer() {
+        this.timer = setInterval(() => {
+            let newTime = this.state.splashTime - 1;
+            this.setState({
+                splashTime: newTime
+            });
+
+            if (newTime === 0) {
+                this.closeSplash();
+            }
+
+        }, 1000);
+    }
+
+    openSplash() {
+        Animated.timing(
+          this.state.fadeInOpacity,
+          {
+              toValue: 1,
+              duration: 1000,
+          }
+        ).start(() => {
+            this.startTimer();
+        });
+    }
+
+    closeSplash() {
+        if (this.timer) {
+            clearTimeout(this.timer);
+        }
+
+        Animated.timing(
+          this.state.fadeInOpacity,
+          {
+              toValue: 0,
+              duration: 500,
+          }
+        ).start(() => {
+
+            // Navigation.mergeOptions(this.props.componentId, {
+            //     topBar: {
+            //         visible: true,
+            //         title: {
+            //             text: '首页'
+            //         }
+            //     },
+            //     bottomTabs: {
+            //         visible: true,
+            //
+            //         drawBehind: false,
+            //         animate: false
+            //     }
+            // });
+
+            this.setState({
+                showSplash: false
+            })
+
+        });
+    }
+
+    onSplashPress() {
+        if (this.state.splashLink) {
+            if (this.timer) {
+                clearTimeout(this.timer);
+            }
+
+            Navigation.mergeOptions(this.props.componentId, {
+                topBar: {
+                    visible: true,
+                    title: {
+                        text: '首页'
+                    }
+                },
+                bottomTabs: {
+                    visible: true
+                }
+            });
+
+            Navigation.push(this.props.componentId, {
+                component: {
+                    name: 'WebView',
+                    options: {
+                        bottomTabs: {
+                            visible: false,
+
+                            // hide bottom tab for android
+                            drawBehind: true,
+                            animate: true
+                        }
+                    },
+                    passProps: this.state.splashLink.passProps
+                }
+            }).then(() => {
+
+                this.setState({
+                    showSplash: false,
+                    fadeInOpacity: new Animated.Value(0)
+                });
+            });
+        }
+    }
+
+    refreshTopic() {
+        Api.getTodayTopic()
+          .then(topic => {
+              if (topic) {
+                  this.setState({topic});
+              }
+          })
+          .catch((err) => console.log(err))
+    }
+
+    openTopicPage() {
+        Navigation.push(this.props.componentId, {
+            component: {
+                name: 'Topic',
+                options: {
+                    bottomTabs: {
+                        visible: false,
+
+                        // hide bottom tab for android
+                        drawBehind: true,
+                        animate: true
+                    }
+                },
+                passProps: {
+                    topic: this.state.topic,
+                    title: '话题：' + this.state.topic.title
+                }
+            }
+        });
+    }
+
+
+    render() {
+        return (
+          <View style={localStyle.wrap}>
+              <DiaryList ref={(r) => this.diaryList = r}
+                         dataSource={this.dataSource}
+                         listHeader={this.renderHeader.bind(this)}
+                         refreshHeader={this.refreshTopic.bind(this)}
+                         {...this.props}
+              />
+          </View>
+        );
+        //todo: Splash
+        // return (
+        //   <View style={localStyle.wrap}>
+        //       {
+        //           this.state.showSplash ? this.renderModal() : (
+        //             <DiaryList ref={(r) => this.diaryList = r}
+        //                        dataSource={this.dataSource}
+        //                        listHeader={this.renderHeader.bind(this)}
+        //                        refreshHeader={this.refreshTopic.bind(this)}
+        //                        {...this.props}
+        //             />
+        //           )
+        //       }
+        //       {/*<ActionSheet/>*/}
+        //   </View>
+        // );
+    }
+
+    renderHeader() {
+        return this.state.topic ? (
+          <View style={localStyle.topic}>
+              <TouchableOpacity onPress={this.openTopicPage.bind(this)} activeOpacity={0.7}>
+                  <ImageBackground
+                    style={localStyle.topicBox} imageStyle={{borderRadius: 8}}
+                    source={{uri: this.state.topic.imageUrl}}>
+                      <Text style={localStyle.topicTitle} allowFontScaling={false}># {this.state.topic.title}</Text>
+                      <Text style={localStyle.topicIntro} allowFontScaling={false}>{this.state.topic.intro}</Text>
+                  </ImageBackground>
+              </TouchableOpacity>
+          </View>
+        ) : null;
+    }
+
+    renderModal() {
+        return (
+          <Modal visible={this.state.hasSplash}
+                 onShow={() => {
+                 }}
+                 onRequestClose={() => {
+                 }}
+          >
+              <Animated.View style={{flex: 1, opacity: this.state.fadeInOpacity}}>
+                  <TouchableWithoutFeedback style={{flex: 1}} onPress={this.onSplashPress.bind(this)}>
+                      <ImageBackground
+                        style={{flex: 1, width: '100%', height: '100%'}}
+                        source={{uri: this.state.splashImage}}
+                      >
+
+                          <View style={localStyle.closeButtonWrap}>
+                              <View style={localStyle.closeButtonContainer}>
+                                  <Button
+                                    buttonStyle={localStyle.closeButton}
+                                    title={'关闭 ' + this.state.splashTime}
+                                    onPress={this.closeSplash.bind(this)}
+                                    textStyle={localStyle.closeButtonText}
+                                  />
+                              </View>
+                          </View>
+                      </ImageBackground>
+                  </TouchableWithoutFeedback>
+              </Animated.View>
+          </Modal>
+        );
+    }
 }
 
-const styles = StyleSheet.create({
-    container: {
+const localStyle = StyleSheet.create({
+    wrap: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
+    topic: {
+        paddingTop: 0
+    },
+    topicBox: {
+        flex: 1,
+        height: 240,
+        marginTop: 15,
+        marginBottom: 15,
+        marginHorizontal: 15,
+        backgroundColor: Color.spaceBackground,
+        borderRadius: 8
+    },
+    topicTitle: {
+        fontSize: 24,
+        color: '#FFF',
+        paddingHorizontal: 20,
+        paddingTop: 15,
+        paddingBottom: 10,
+        textShadowColor: '#000',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 2,
+        shadowOpacity: 0.2
+    },
+    topicIntro: {
+        fontSize: 16,
+        color: '#FFF',
+        paddingHorizontal: 22,
+        textShadowColor: '#000',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 2,
+        shadowOpacity: 0.5
+    },
+
+    closeButtonWrap: {
+        flexDirection: 'row-reverse',
+        marginTop: Api.IS_IOS ? (Api.IS_IPHONEX ? 50 : 30) : 20
+    },
+    closeButtonContainer: {
+        width: 80,
+        backgroundColor: 'black',
+        opacity: 0.75,
+        borderRadius: 40,
+        marginRight: 15
+    },
+    closeButton: {
+        borderWidth: 1,
+        borderColor: 'black',
+        paddingVertical: 5,
+        paddingHorizontal: 0,
+        backgroundColor: 'black'
+    },
+    closeButtonText: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: 'white',
+        fontFamily: 'Helvetica'
+    }
 });

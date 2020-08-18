@@ -19,7 +19,7 @@ export default function App() {
     () => {
       return {
         isLogin: isLogin,
-        setLogin: (success: Boolean) => { setLogin(success) }
+        setLogin: (success: boolean) => { setLogin(success) }
       }
     },
     [isLogin, setLogin]
