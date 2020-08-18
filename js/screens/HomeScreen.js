@@ -41,7 +41,7 @@ import Api from '../util/api';
 import Event from '../util/event'
 import HomeDiaryData from '../dataLoader/homeDiaryData';
 
-import DiaryList from '../components/Diary/diaryList';
+import DiaryList from '../components/diary/diaryList';
 
 export default class HomePage extends Component {
 
