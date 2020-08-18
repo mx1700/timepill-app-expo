@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
 import {Avatar} from "react-native-elements";
 
 
-export default function UserIcon(props) {
+export default React.memo(function UserIcon(props) {
     const {iconUrl, style, ...otherProps} = props
     return (
       <Avatar
@@ -15,4 +14,4 @@ export default function UserIcon(props) {
         activeOpacity={0.7}
       />
     );
-}
+});
