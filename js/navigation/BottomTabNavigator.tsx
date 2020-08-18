@@ -7,9 +7,11 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 // @ts-ignore
 import HomeScreen from '../screens/HomeScreen';
+// @ts-ignore
+import {MyScreen} from '../screens/UserScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import {BottomTabParamList, HomeParamList, TabOneParamList, TabTwoParamList} from '../types';
+import {BottomTabParamList, HomeParamList, MyParamList, TabOneParamList, TabTwoParamList} from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -36,6 +38,14 @@ export default function BottomTabNavigator() {
         name="TabOne"
         component={TabOneNavigator}
         options={{
+          tabBarIcon: ({color}) => <TabBarIcon name="ios-code" color={color}/>,
+        }}
+      />
+      <BottomTab.Screen
+        name="My"
+        component={MyNavigator}
+        options={{
+          tabBarLabel: "我的",
           tabBarIcon: ({color}) => <TabBarIcon name="ios-code" color={color}/>,
         }}
       />
@@ -67,6 +77,20 @@ function HomeNavigator() {
         options={{headerTitle: '首页'}}
       />
     </HomeStack.Navigator>
+  );
+}
+
+const MyStack = createStackNavigator<MyParamList>();
+
+function MyNavigator() {
+  return (
+    <MyStack.Navigator>
+      <MyStack.Screen
+        name="MyScreen"
+        component={MyScreen}
+        options={{headerTitle: '首页'}}
+      />
+    </MyStack.Navigator>
   );
 }
 

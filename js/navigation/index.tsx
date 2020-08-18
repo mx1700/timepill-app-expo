@@ -8,16 +8,12 @@ import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 // @ts-ignore
-import UserScreen from "../screens/UserScreen";
+import {UserScreen} from "../screens/UserScreen";
 // @ts-ignore
 import DiaryScreen from "../screens/DiaryScreen";
 // @ts-ignore
-import LoginScreen from "../screens/LoginScreen"
-// @ts-ignore
 import AuthScreen from "../screens/AuthScreen"
-import {useContext, useState} from "react";
-// @ts-ignore
-import Token from '../util/token'
+import {useContext} from "react";
 import AuthContext from "../util/AuthContext";
 
 // If you are not familiar with React Navigation, we recommend going through the

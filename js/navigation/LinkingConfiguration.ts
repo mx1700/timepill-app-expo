@@ -22,6 +22,16 @@ export default {
               TabTwoScreen: 'two',
             },
           },
+          My: {
+            screens: {
+              // MyScreen: 'my',
+              MyScreen: {
+                screens: {
+                  Intro: "my/intro"
+                }
+              },
+            },
+          },
         },
       },
       User: 'users',

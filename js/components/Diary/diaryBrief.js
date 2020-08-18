@@ -61,7 +61,7 @@ export default class DiaryBrief extends Component {
         <Touchable onPress={() => this.props.onDiaryPress ? this.props.onDiaryPress(this.state.diary) : null}>
         <View style={[localStyle.box, this.props.style]}>
             {(user && user.iconUrl && this.show('userIcon'))
-                ? <UserIcon iconUrl={user.iconUrl} onPress={this.props.onUserIconPress}/> : null}
+                ? <UserIcon iconUrl={user.iconUrl} style={localStyle.userIcon} onPress={this.props.onUserIconPress}/> : null}
 
             <View style={localStyle.body}>
                 <View style={localStyle.title}>
@@ -170,5 +170,9 @@ const localStyle = StyleSheet.create({
     moreIcon: {
         marginLeft: 7,
         marginRight: 13
+    },
+    userIcon: {
+        marginTop: 3,
+        marginRight: 8,
     }
 });
