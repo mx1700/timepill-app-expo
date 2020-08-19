@@ -53,8 +53,8 @@ function UserTab(props) {
   }
 
   return (
-      <UserContext.Provider value={userContext} style={{flex: 1}}>
-        <Tab.Navigator backBehavior={"none"}>
+      <UserContext.Provider value={userContext}>
+        <Tab.Navigator backBehavior={"none"} style={{flex: 1, height: 1}}>
           <Tab.Screen name="Intro" component={Intro}
                       options={{tabBarLabel: '简介'}}/>
           <Tab.Screen name="Diary" component={UserDiaries}
