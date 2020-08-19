@@ -21,7 +21,7 @@ export default {
     text: '#ddd',
     secondaryText: '#9C9C9C',
 
-    background: '#334',
+    background: '#202029',
     backgroundSelect: '#b6d8ff',
 
     tint: tintColorDark,

@@ -1,50 +1,50 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Text, Image, ImageBackground} from 'react-native';
-
+import {StyleSheet, View, ImageBackground} from 'react-native';
+import {View as TView, Text, useThemeColor} from '../Themed'
 import Api from '../../util/api';
 import Color from '../../constants/Colors'
+import {MonoText} from '../StyledText'
 
-export default class Notebook extends Component {
+export default function Notebook (props) {
+    const {notebook} = props;
+    const border = useThemeColor({light: '#eee', dark: '#333'}, 'borderColor')
+    return (
+      <TView
+        style={Api.IS_ANDROID ? localStyle.androidBox : localStyle.iosBox}
+        lightColor={"#fff"}
+        darkColor={"#202020"}
+      >
+          <ImageBackground key={notebook.id}
+                           style={localStyle.cover} imageStyle={{resizeMode: 'cover'}}
+                           source={{uri: notebook.coverUrl}}>
 
-    getLabel(isPublic) {
-        return isPublic ? null : (
-            <Text style={localStyle.privateLabel}>私密</Text>
-        );
-    }
+              <Label isPublic={notebook.isPublic}/>
+          </ImageBackground>
 
-    render() {
-        let notebook = this.props.notebook;
-        
-        return (
-            <View style={Api.IS_ANDROID ? localStyle.androidBox : localStyle.iosBox}>
-                <ImageBackground key={notebook.id}
-                    style={localStyle.cover} imageStyle={{resizeMode: 'cover'}}
-                    source={{uri: notebook.coverUrl}}>
-                    
-                    {this.getLabel(notebook.isPublic)}
-                </ImageBackground>
+          <View style={[localStyle.banner, {borderColor: border}]}>
+              <View style={localStyle.subject}>
+                  <Text allowFontScaling={false}>{notebook.subject}</Text>
+              </View>
+              <Text style={localStyle.desc} allowFontScaling={false}>
+                  {notebook.isExpired ? '已过期' : '未过期'}
+              </Text>
+              <MonoText style={localStyle.desc} allowFontScaling={false}>{notebook.created} 创建</MonoText>
+              <MonoText style={localStyle.desc} allowFontScaling={false}>{notebook.expired} 过期</MonoText>
+          </View>
+      </TView>
+    );
+}
 
-                <View style={localStyle.banner}>
-                    <View style={localStyle.subject}>
-                        <Text allowFontScaling={false}>{notebook.subject}</Text>
-                    </View>
-                    <Text style={localStyle.desc} allowFontScaling={false}>
-                        {notebook.isExpired ? '已过期' : '未过期'}
-                    </Text>
-                    <Text style={localStyle.desc} allowFontScaling={false}>
-                        {notebook.created}至{notebook.expired}
-                    </Text>
-                </View>
-            </View>
-        );
-    }
+function Label(props) {
+    return props.isPublic ? null : (
+      <Text style={localStyle.privateLabel}>私密</Text>
+    );
 }
 
 const localStyle = StyleSheet.create({
     androidBox: {
         width: 140,
         elevation: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         margin: 3,
         marginBottom: 15
@@ -54,7 +54,6 @@ const localStyle = StyleSheet.create({
         shadowColor: '#444',
         shadowOpacity: 0.1,
         shadowOffset: {width: 0, height: 0},
-        backgroundColor: '#fff',
         alignItems: 'center',
         margin: 3,
         marginBottom: 15
@@ -79,9 +78,9 @@ const localStyle = StyleSheet.create({
     banner: {
         alignItems:'center',
         width: 140,
-        borderColor: '#eee',
         borderWidth: StyleSheet.hairlineWidth,
         borderTopWidth: 0,
+        paddingHorizontal: 5,
         paddingBottom: 5
     },
     subject: {
@@ -91,7 +90,8 @@ const localStyle = StyleSheet.create({
         height: 55,
         textAlign: 'center',
         fontWeight: 'bold',
-        color: Color.light.text
+        color: Color.light.text,
+        fontSize: 14
     },
     desc: {
         fontSize: 10,
