@@ -45,6 +45,7 @@ export default class DiaryBrief extends React.PureComponent {
     }
   }
 
+
   onPress = () => {
     this.props.onDiaryPress && this.props.onDiaryPress(this.state.diary)
   }
