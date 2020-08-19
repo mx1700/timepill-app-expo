@@ -81,7 +81,6 @@ function UserDiaries() {
     []
   );
 
-  return <Text>1111</Text>
   return (<DiaryList
     dataSource={dataSource}
     showField={['subject', 'createdTime']}

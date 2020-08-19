@@ -88,7 +88,7 @@ function MyNavigator() {
       <MyStack.Screen
         name="MyScreen"
         component={MyScreen}
-        options={{headerTitle: '首页'}}
+        options={{headerTitle: '我的'}}
       />
     </MyStack.Navigator>
   );
