@@ -35,14 +35,18 @@ export default class DiaryBrief extends React.PureComponent {
     return this.showField.indexOf(field) >= 0;
   }
 
-  onDiaryAction() {
+  onDiaryAction = () => {
     DiaryAction.action(this.props.componentId, this.state.diary);
   }
 
-  refreshDiary(diary) {
+  refreshDiary = (diary) => {
     if (diary && this.props.refreshBack) {
       this.props.refreshBack(diary);
     }
+  }
+
+  onPress = () => {
+    this.props.onDiaryPress && this.props.onDiaryPress(this.state.diary)
   }
 
   render() {
@@ -57,7 +61,7 @@ export default class DiaryBrief extends React.PureComponent {
     let user = diary.user;
 
     return (
-      <Touchable onPress={() => this.props.onDiaryPress ? this.props.onDiaryPress(this.state.diary) : null}>
+      <Touchable onPress={this.onPress}>
         <View style={[localStyle.box, this.props.style]}>
           {(user && user.iconUrl && this.show('userIcon'))
             ?
@@ -98,13 +102,13 @@ export default class DiaryBrief extends React.PureComponent {
                               count={diary.like_count}
                               active={diary.liked}
                               clickable={!this.state.expired}
-                              refreshBack={this.refreshDiary.bind(this)}
+                              refreshBack={this.refreshDiary}
                 />
               </View>
 
               {
                 isMine && !expired
-                  ? <TouchableOpacity onPress={this.onDiaryAction.bind(this)}>
+                  ? <TouchableOpacity onPress={this.onDiaryAction}>
                     <Ionicons name="ios-more" size={24}
                               lightColor={Color.light.primary}
                               darkColor={Color.dark.primary}

@@ -3,7 +3,7 @@ import {StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { View, Text, Ionicons, Fontisto } from "../Themed";
 import Color from '../../constants/Colors';
 
-export default class DiaryIconComment extends Component {
+export default class DiaryIconComment extends React.PureComponent {
 
     constructor(props) {
         super(props);

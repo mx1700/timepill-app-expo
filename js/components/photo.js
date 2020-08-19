@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 
-export default class Photo extends Component {
+export default class Photo extends React.PureComponent {
 
     constructor(props) {
         super(props);

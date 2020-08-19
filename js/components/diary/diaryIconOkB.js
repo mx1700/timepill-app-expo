@@ -14,7 +14,7 @@ import Msg from '../../util/msg';
 // import Event from '../../util/event';
 
 
-export default class DiaryIconOkB extends Component {
+export default class DiaryIconOkB extends React.PureComponent {
 
     constructor(props) {
         super(props);

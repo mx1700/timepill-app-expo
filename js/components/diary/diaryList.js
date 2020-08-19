@@ -247,19 +247,19 @@ class DiaryList extends Component {
                         ListHeaderComponent={this.props.listHeader}
 
                         ListFooterComponent={() => {
-                            if (this.state.refreshing || this.state.diaries.length == 0) {
+                            if (this.state.refreshing || this.state.diaries.length === 0) {
                                 return null;
                             }
 
                             if (this.state.loadFailed) {
-                                return <ListFooterFailed refresh={this.loadMore.bind(this)}></ListFooterFailed>;
+                                return <ListFooterFailed refresh={this.loadMore.bind(this)}/>;
                             }
 
                             if (!this.state.hasMore) {
-                                return <ListFooterEnd></ListFooterEnd>;
+                                return <ListFooterEnd/>;
                             }
 
-                            return <ListFooterLoading></ListFooterLoading>;
+                            return <ListFooterLoading/>;
                         }}
 
                         refreshing={this.state.refreshing}
