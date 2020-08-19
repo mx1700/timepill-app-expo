@@ -22,6 +22,7 @@ export default class UserIntro extends Component {
     }
 
     componentDidMount() {
+        console.log("UserIntro componentDidMount")
         Api.getSelfInfoByStore()
             .then(user => {
                 this.selfInfo = user;

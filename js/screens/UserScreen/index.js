@@ -1,20 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, useContext, useEffect} from 'react';
 import {StyleSheet, Animated, DeviceEventEmitter, Alert} from 'react-native';
-import {View, Text, Button} from '../../components/Themed';
-
-
-import Msg from '../../util/msg';
+import {View, Text, Button, Container} from '../../components/Themed';
 import Api from '../../util/api';
-// import {Icon} from '../style/icon';
-import Event from "../../util/event";
-import Color from '../../constants/Colors';
 
 import UserIntro from './userIntro';
 import DiaryList from '../../components/diary/diaryList'
-// import UserDiaryData from '../dataLoader/userDiaryData';
-// import DiaryList from '../components/diary/diaryList';
-// import NotebookList from '../components/notebook/notebookList';
-
+import UserContext from './UserContext'
 import useApi from '../../hooks/useApi';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import UserDiaryData from "../../dataLoader/userDiaryData";
@@ -22,69 +13,83 @@ import NotebookList from "../../components/notebook/notebookList";
 
 const Tab = createMaterialTopTabNavigator();
 
-export function UserScreen() {
-    const [loading, error, user] = useApi(Api.getSelfInfoByStore);
+export function UserScreen(props) {
+  const uid = props.id || props.route.params.id;
+  const {navigation} = props;
 
-    if(loading) {
-        return <Text>loading</Text>
+  const [loading, error, user] = useApi(Api.getUserInfo, uid);
+  useEffect(() => {
+    if(user) {
+      navigation.setOptions({ title: user.name })
     }
+  }, [user])
 
-    if(error) {
-        return <Text>error: {error}</Text>
-    }
-
-    return (<Text>login: {user.name}</Text>);
-    // return (
-    //   <Tab.Navigator>
-    //       <Tab.Screen name="Home" component={HomeScreen} />
-    //       <Tab.Screen name="Settings" component={SettingsScreen} />
-    //   </Tab.Navigator>
-    // );
+  return <UserTab user={user} isSelf={false} loading={loading} error={error} />
 }
 
 export function MyScreen() {
-    const [loading, error, user] = useApi(Api.getSelfInfoByStore);
-
-    if(loading) {
-        return <Text>loading</Text>
-    }
-
-    if(error) {
-        return <Text>error: {error}</Text>
-    }
-
-    return (
-      <Tab.Navigator>
-          <Tab.Screen name="Intro" component={() => <UserIntro user={user}/>}
-                      options={{ tabBarLabel: '简介' }} />
-          <Tab.Screen name="Diary" component={() => <MyDiaries user={user}/>}
-                      options={{ tabBarLabel: '日记' }} />
-          <Tab.Screen name="Notebook" component={() => <MyNotebooks user={user}/>}
-                      options={{ tabBarLabel: '日记本' }} />
-      </Tab.Navigator>
-    );
-    // return (<Text>login: {user.name}</Text>);
+  const [loading, error, user] = useApi(Api.getSelfInfoByStore);
+  return <UserTab user={user} isSelf={true} loading={loading} error={error} />
 }
 
-function MyDiaries(props) {
-    console.log("MyDiaries", props);
-    const user = props.user;
-    const dataSource = React.useMemo(
-      () => new UserDiaryData(user.id),
-      [user.id]
-    );
+function UserTab(props) {
+  const {user, isSelf, loading, error} = props;
+  const userContext = React.useMemo(
+    () => {
+      console.log("MyScreen useMemo")
+      return {
+        user: user,
+        isSelf: isSelf,
+      }
+    },
+    [user]
+  );
+  if (loading) {
+    return <Text>loading</Text>
+  }
 
-    return (<DiaryList
-      dataSource={dataSource}
-      showField={['subject', 'createdTime']}
-      isMine={true}
-    />)
+  if (error) {
+    return <Text>error: {error}</Text>
+  }
+
+  return (
+      <UserContext.Provider value={userContext} style={{flex: 1}}>
+        <Tab.Navigator backBehavior={"none"}>
+          <Tab.Screen name="Intro" component={Intro}
+                      options={{tabBarLabel: '简介'}}/>
+          <Tab.Screen name="Diary" component={UserDiaries}
+                      options={{tabBarLabel: '日记'}}/>
+          <Tab.Screen name="Notebook" component={UserNotebooks}
+                      options={{tabBarLabel: '日记本'}}/>
+        </Tab.Navigator>
+      </UserContext.Provider>
+  );
 }
 
-function MyNotebooks(props) {
-    console.log("MyNotebooks", props);
-    const user = props.user;
-    return (<NotebookList
-      user={user}
-    />);
+function Intro() {
+  const {user} = useContext(UserContext);
+  return <UserIntro user={user}/>
+}
+
+function UserDiaries() {
+  const {user, isSelf} = useContext(UserContext);
+  const dataSource = React.useMemo(
+    () => {
+      console.log("MyDiaries useMemo")
+      return new UserDiaryData(user.id)
+    },
+    []
+  );
+
+  return <Text>1111</Text>
+  return (<DiaryList
+    dataSource={dataSource}
+    showField={['subject', 'createdTime']}
+    isMine={isSelf}
+  />)
+}
+
+function UserNotebooks(props) {
+  const {user, isSelf} = useContext(UserContext);
+  return (isSelf ? <NotebookList /> : <NotebookList user={user} />);
 }

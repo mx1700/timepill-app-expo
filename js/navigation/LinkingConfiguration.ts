@@ -36,7 +36,14 @@ export default {
           },
         },
       },
-      User: 'users',
+      User: {
+        path: "user/:id",
+        screens: {
+          Intro: "intro",
+          Diary: "diary",
+          Notebook: "notebook"
+        }
+      },
       Login: 'login',
       Diary: 'diary',
       NotFound: '*',

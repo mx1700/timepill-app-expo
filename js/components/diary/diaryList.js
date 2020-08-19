@@ -60,24 +60,10 @@ class DiaryList extends Component {
   }
 
   _onUserIconPress(diary) {
-    //todo
-    // Navigation.push(this.props.componentId, {
-    //     component: {
-    //         name: 'User',
-    //         options: {
-    //             bottomTabs: {
-    //                 visible: false,
-    //
-    //                 // hide bottom tab for android
-    //                 drawBehind: true,
-    //                 animate: true
-    //             }
-    //         },
-    //         passProps: {
-    //             user: diary.user
-    //         }
-    //     }
-    // });
+    this.navigation.push("User", {
+      id: diary.user.id,
+      name: diary.user.name,
+    })
   }
 
   _onDiaryPress(index, diary) {
@@ -272,7 +258,7 @@ class DiaryList extends Component {
           refreshing={this.state.refreshing}
           onRefresh={this.refresh.bind(this)}
 
-          onEndReachedThreshold={5}
+          onEndReachedThreshold={0.2}
           onEndReached={this.state.hasMore ? this.loadMore.bind(this) : null}
 
           onScroll={(event) => {
@@ -285,10 +271,10 @@ class DiaryList extends Component {
   }
 }
 
-export default function DiaryListWarp(props) {
+export default React.memo(function DiaryListWarp(props) {
   const navigation = useNavigation();
   return <DiaryList {...props} navigation={navigation}/>;
-}
+});
 
 const localStyle = StyleSheet.create({
   container: {

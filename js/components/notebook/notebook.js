@@ -78,7 +78,7 @@ const localStyle = StyleSheet.create({
     },
     banner: {
         alignItems:'center',
-        width: 141,
+        width: 140,
         borderColor: '#eee',
         borderWidth: StyleSheet.hairlineWidth,
         borderTopWidth: 0,

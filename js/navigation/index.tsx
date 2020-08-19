@@ -45,7 +45,7 @@ function RootNavigator() {
       {authContext.isLogin ? (
         <>
           <Stack.Screen name="Root" component={BottomTabNavigator} options={{headerShown: false}}/>
-          <Stack.Screen name="User" component={UserScreen} options={{title: 'My home'}} initialParams={{id: "0"}}/>
+          <Stack.Screen name="User" component={UserScreen} options={({ route }) => ({ title: route.params.name })} initialParams={{id: "0"}}/>
           <Stack.Screen name="Diary" component={DiaryScreen} options={{title: 'Oops!'}}/>
           <Stack.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
         </>
