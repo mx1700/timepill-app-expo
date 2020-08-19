@@ -27,7 +27,9 @@ export default {
               // MyScreen: 'my',
               MyScreen: {
                 screens: {
-                  Intro: "my/intro"
+                  Intro: "my/intro",
+                  Diary: "my/diary",
+                  Notebook: "my/notebook"
                 }
               },
             },

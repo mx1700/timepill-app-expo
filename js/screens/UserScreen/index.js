@@ -17,6 +17,8 @@ import DiaryList from '../../components/diary/diaryList'
 
 import useApi from '../../hooks/useApi';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import UserDiaryData from "../../dataLoader/userDiaryData";
+import NotebookList from "../../components/notebook/notebookList";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -53,18 +55,36 @@ export function MyScreen() {
 
     return (
       <Tab.Navigator>
-          <Tab.Screen name="Intro" component={UserIntro} initialParams={{user: user}} />
+          <Tab.Screen name="Intro" component={() => <UserIntro user={user}/>}
+                      options={{ tabBarLabel: '简介' }} />
+          <Tab.Screen name="Diary" component={() => <MyDiaries user={user}/>}
+                      options={{ tabBarLabel: '日记' }} />
+          <Tab.Screen name="Notebook" component={() => <MyNotebooks user={user}/>}
+                      options={{ tabBarLabel: '日记本' }} />
       </Tab.Navigator>
     );
     // return (<Text>login: {user.name}</Text>);
 }
 
-function MyDiaries() {
-    return (<DiaryList
-      {...this.props}
+function MyDiaries(props) {
+    console.log("MyDiaries", props);
+    const user = props.user;
+    const dataSource = React.useMemo(
+      () => new UserDiaryData(user.id),
+      [user.id]
+    );
 
-      dataSource={this.dataSource}
+    return (<DiaryList
+      dataSource={dataSource}
       showField={['subject', 'createdTime']}
-      isMine={!this.user}
+      isMine={true}
     />)
+}
+
+function MyNotebooks(props) {
+    console.log("MyNotebooks", props);
+    const user = props.user;
+    return (<NotebookList
+      user={user}
+    />);
 }

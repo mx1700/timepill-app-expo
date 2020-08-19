@@ -1,23 +1,17 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Ionicons} from '../Themed'
 
-import Color from '../../style/color'
+import Color from '../../constants/Colors'
 
 
 export default class NotebookAdd extends Component {
-
-    _defaultOnPress() {
-        
-    }
-
     render() {
         return (
-            <TouchableOpacity activeOpacity={0.7} onPress={
-                this.props.onPress ? this.props.onPress : this._defaultOnPress.bind(this)
-            }>
+            <TouchableOpacity activeOpacity={0.7} onPress={this.props.onPress}>
                 <View style={localStyle.box}>
-                    <Ionicons name="md-add" size={48} color={Color.inactiveText} />
+                    <Ionicons name="md-add" size={48}
+                              lightColor={Color.light.secondaryText} darkColor={Color.dark.secondaryText} />
                 </View>
             </TouchableOpacity>
         );

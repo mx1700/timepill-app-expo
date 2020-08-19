@@ -2,19 +2,14 @@ import React, { Component } from 'react';
 import {
     InteractionManager,
     View,
-    Text,
     FlatList,
     StyleSheet,
-    RefreshControl,
     TouchableOpacity
 } from 'react-native';
-import {Navigation} from 'react-native-navigation';
-
+import {Container} from "../Themed"
 import Api from '../../util/api';
 import Notebook from './notebook'
 import NotebookAdd from './notebookAdd'
-import {Icon} from "../../style/icon";
-
 
 export default class NotebookList extends Component {
 
@@ -62,14 +57,15 @@ export default class NotebookList extends Component {
     }
 
     _onAddPress() {
-        Navigation.push(this.props.componentId, {
-            component: {
-                name: 'NotebookEdit',
-                passProps: {
-                    
-                }
-            }
-        });
+        //todo
+        // Navigation.push(this.props.componentId, {
+        //     component: {
+        //         name: 'NotebookEdit',
+        //         passProps: {
+        //
+        //         }
+        //     }
+        // });
     }
 
     _onNotebookPress(notebook) {
@@ -78,24 +74,25 @@ export default class NotebookList extends Component {
             return
         }
 
-        Navigation.push(this.props.componentId, {
-            component: {
-                name: 'NotebookDetail',
-                options: {
-                    bottomTabs: {
-                        visible: false,
-
-                        // hide bottom tab for android
-                        drawBehind: true,
-                        animate: true
-                    }
-                },
-                passProps: {
-                    notebook: notebook,
-                    isMine: !this.state.user
-                }
-            }
-        });
+        //todo
+        // Navigation.push(this.props.componentId, {
+        //     component: {
+        //         name: 'NotebookDetail',
+        //         options: {
+        //             bottomTabs: {
+        //                 visible: false,
+        //
+        //                 // hide bottom tab for android
+        //                 drawBehind: true,
+        //                 animate: true
+        //             }
+        //         },
+        //         passProps: {
+        //             notebook: notebook,
+        //             isMine: !this.state.user
+        //         }
+        //     }
+        // });
     }
 
     refresh() {
@@ -148,7 +145,8 @@ export default class NotebookList extends Component {
     render() {
         let hasData = this.state.notebooks && this.state.notebooks.length > 0;
         return hasData ? (
-            <FlatList style={{marginTop: 15, backgroundColor: 'white'}}
+          <Container>
+            <FlatList style={{marginTop: 15}}
                 data={this.state.notebooks}
 
                 keyExtractor={(item, index) => {
@@ -160,7 +158,7 @@ export default class NotebookList extends Component {
                         if(!notebook) {
                             return this._renderPlaceHolder();
 
-                        } else if(notebook.id == 'new') {
+                        } else if(notebook.id === 'new') {
                             return this._renderAdd();
                         }
 
@@ -178,6 +176,7 @@ export default class NotebookList extends Component {
                 onRefresh={this.refresh.bind(this)}
 
             />
+          </Container>
         ) : null;
     }
 }

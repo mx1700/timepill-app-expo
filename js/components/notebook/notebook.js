@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {View, StyleSheet, Text, Image, ImageBackground} from 'react-native';
 
 import Api from '../../util/api';
-import Color from '../../style/color'
-
+import Color from '../../constants/Colors'
 
 export default class Notebook extends Component {
 
@@ -92,10 +91,10 @@ const localStyle = StyleSheet.create({
         height: 55,
         textAlign: 'center',
         fontWeight: 'bold',
-        color: Color.text
+        color: Color.light.text
     },
     desc: {
         fontSize: 10,
-        color: Color.inactiveText
+        color: Color.light.secondaryText
     }
 });
