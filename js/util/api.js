@@ -19,9 +19,18 @@ const VERSION = Constants.nativeBuildVersion;
 // console.log(Constants)
 //
 // const IS_IPHONEX = isIphoneX();
+import {decode, encode} from 'base-64'
+
+if (!global.btoa) {
+    global.btoa = encode;
+}
+
+if (!global.atob) {
+    global.atob = decode;
+}
 
 let baseUrl, v2Url;
-if(!__DEV__) {
+if(!(__DEV__ && IS_WEB)) {
     baseUrl = 'https://open.timepill.net/api';
     v2Url = 'https://v2.timepill.net/api';
 } else {
