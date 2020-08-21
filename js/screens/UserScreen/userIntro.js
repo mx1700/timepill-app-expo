@@ -78,16 +78,16 @@ export default class UserIntro extends Component {
 
         return user ? (
           <Container style={localStyle.container}>
-            <ScrollView automaticallyAdjustContentInsets={false}>
+            <ScrollView automaticallyAdjustContentInsets={false} contentContainerStyle={{alignItems: 'center'}}>
                 <View style={localStyle.userIcon}>
                     <UserIcon width={90} height={90} iconUrl={user.coverUrl} />
                     {
                         followed < 0
-                          ? <Button title="+关注"
+                          ? <Button title="+ 关注"
                                     type="outline"
                                     buttonStyle={localStyle.followButton}
                                     onPress={this._onAddFollow.bind(this)}
-                                    titleStyle={{fontSize: 15}}
+                                    titleStyle={{fontSize: 14}}
                           />
                           : (
                             followed > 0
@@ -102,12 +102,13 @@ export default class UserIntro extends Component {
                     }
                     <Text style={localStyle.userTitle}>{user.name}</Text>
                 </View>
+                <View style={localStyle.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
                 {
                     user.intro && user.intro.length > 0
                     ? (<Text style={localStyle.introText}>{user.intro}</Text>) : null
                 }
-                
+                <View style={localStyle.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
                 <Text style={localStyle.joinTime}>
                     {moment(user.created).format('YYYY年M月D日')}加入胶囊
                 </Text>
@@ -123,32 +124,34 @@ const localStyle = StyleSheet.create({
         flex: 1,
     },
     userIcon: {
-        marginTop: 20,
+        marginTop: 50,
+        marginBottom: 20,
+        flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
     },
     followButton: {
         width: 90,
         height: 32,
-        marginTop: 20,
-        marginRight: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
+        marginTop: 30,
     },
     userTitle: {
         fontSize: 22,
         marginTop: 30,
-        marginRight: 3,
         fontWeight: 'bold',
-    },
+},
     introText: {
-        padding: 15,
+        paddingVertical: 15,
         lineHeight: 24,
-        textAlign: 'center'
+        textAlign: 'center',
+        width: "80%"
+    },
+    separator: {
+        marginVertical: 30,
+        height: 1,
+        width: "80%"
     },
     joinTime: {
-        marginTop: 30,
-        marginBottom:60,
+        marginBottom:35,
         padding: 15,
         color: Color.light.secondaryText,
         lineHeight: 20,

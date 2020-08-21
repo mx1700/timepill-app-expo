@@ -75,7 +75,7 @@ export function Button(props: ThemeProps & DefaultButton['props']) {
   const {style, lightColor, darkColor, buttonStyle, type, ...otherProps} = props;
   const color = useThemeColor({light: lightColor, dark: darkColor}, 'primary');
 
-  const colorStyle = type != 'outline' ? {backgroundColor: color} : {borderColor: color}
+  const colorStyle = type != 'outline' ? {backgroundColor: color} : {borderColor: color, borderWidth: 1}
   return (<DefaultButton
     style={style}
     type={type}
@@ -122,6 +122,7 @@ const localStyle = StyleSheet.create({
     borderRadius: 999,
     paddingVertical: 10,
     paddingHorizontal: 15,
-    marginHorizontal: 8
+    marginHorizontal: 8,
+    marginVertical: 1
   }
 });
