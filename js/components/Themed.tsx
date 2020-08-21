@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { Text as DefaultText, View as DefaultView, ActivityIndicator as DefaultActivityIndicator } from 'react-native';
+import {
+  Text as DefaultText,
+  View as DefaultView,
+  ActivityIndicator as DefaultActivityIndicator,
+  StyleSheet
+} from 'react-native';
 import { Input as DefaultInput, Button as DefaultButton, Divider as DefaultDivider } from "react-native-elements";
 import { Ionicons as DefaultIonicons,  } from '@expo/vector-icons';
 import { Fontisto as DefaultFontisto } from '@expo/vector-icons';
@@ -70,7 +75,7 @@ export function Button(props: ThemeProps & DefaultButton['props']) {
 
   return (<DefaultButton
     style={style}
-    buttonStyle={[{backgroundColor:color, borderRadius: 999, padding: 10, marginHorizontal: 8}, buttonStyle]}
+    buttonStyle={[{backgroundColor:color}, localStyle.button, buttonStyle]}
     {...otherProps}
   />);
 }
@@ -99,3 +104,12 @@ export function Divider(props: ThemeProps & DefaultDivider['props']) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'divider');
   return (<DefaultDivider style={[{backgroundColor: color}, style]} />);
 }
+
+const localStyle = StyleSheet.create({
+  button: {
+    borderRadius: 999,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginHorizontal: 8
+  }
+});
