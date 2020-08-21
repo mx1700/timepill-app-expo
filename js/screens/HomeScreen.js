@@ -1,25 +1,3 @@
-// import * as React from 'react';
-// import { StyleSheet } from 'react-native';
-// import { Text, View } from '../components/Themed';
-// import {useNavigation} from "@react-navigation/native";
-//
-// export default function HomeScreen(props) {
-//     const navigation = useNavigation();
-//     return (
-//         <View style={styles.container}>
-//             <Text>Home</Text>
-//         </View>
-//     );
-// }
-//
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//     },
-// });
-
 import React, {Component} from 'react';
 import {
     StyleSheet,
@@ -42,8 +20,15 @@ import Event from '../util/event'
 import HomeDiaryData from '../dataLoader/homeDiaryData';
 
 import DiaryList from '../components/diary/diaryList';
+import {useScrollToTop} from "@react-navigation/native";
 
-export default class HomePage extends Component {
+export default function HomePage() {
+    const ref = React.useRef(null);
+    useScrollToTop(ref);
+    return <_HomePage scrollRef={ref}/>
+}
+
+export class _HomePage extends Component {
 
     constructor(props) {
         super(props);
@@ -71,36 +56,12 @@ export default class HomePage extends Component {
             this.closeSplash();
         }
 
-        //todo: 滚动到顶部
-        // this.bottomTabEventListener = Navigation.events().registerBottomTabSelectedListener(
-        //   ({ selectedTabIndex, unselectedTabIndex }) => {
-        //       if(selectedTabIndex == unselectedTabIndex && selectedTabIndex == 0) {
-        //           if(this.diaryList) {
-        //               this.diaryList.scrollToTop();
-        //           }
-        //       }
-        //   }
-        // );
-
         if (Api.IS_ANDROID) {
             setTimeout(() => {
                 //todo
                 //Update.updateAndroid();
             }, 2000);
         }
-
-
-        //todo
-        // this.blockUserListener = DeviceEventEmitter.addListener(Event.userBlocked, (param) => {
-        //     this.diaryList.filter(param.blockUserId);
-        // });
-    }
-
-
-    componentWillUnmount() {
-        //todo
-        // this.bottomTabEventListener.remove();
-        // this.blockUserListener.remove();
     }
 
     startTimer() {
@@ -241,7 +202,7 @@ export default class HomePage extends Component {
     render() {
         return (
           <View style={localStyle.wrap}>
-              <DiaryList ref={(r) => this.diaryList = r}
+              <DiaryList scrollRef={this.props.scrollRef}
                          dataSource={this.dataSource}
                          listHeader={this.renderHeader.bind(this)}
                          refreshHeader={this.refreshTopic.bind(this)}

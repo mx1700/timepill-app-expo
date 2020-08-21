@@ -44,21 +44,6 @@ class DiaryList extends Component {
     });
   }
 
-  scrollToTop() {
-    if (!this.scrollY) {
-      this.scrollY = 0;
-    }
-
-    if (this.scrollY <= 10) {
-      this.refresh();
-      return;
-    }
-
-    this.list.scrollToOffset({
-      offset: 0
-    });
-  }
-
   _onUserIconPress(diary) {
     this.navigation.push("User", {
       id: diary.user.id,
@@ -98,6 +83,7 @@ class DiaryList extends Component {
   }
 
   _onPhotoPress = (photoUrl) => {
+    //todo
     Navigation.push(this.props.componentId, {
       component: {
         name: 'Photo',
@@ -210,7 +196,7 @@ class DiaryList extends Component {
     return (
       <View style={localStyle.container}>
         <FlatList
-          ref={(r) => this.list = r}
+          ref={this.props.scrollRef}
           style={localStyle.list}
 
           data={this.state.diaries}
