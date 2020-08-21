@@ -133,6 +133,7 @@ const localStyle = StyleSheet.create({
         width: 90,
         height: 32,
         marginTop: 30,
+        marginBottom: 2,    //修复底部少1px问题
     },
     userTitle: {
         fontSize: 22,

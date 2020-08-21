@@ -123,6 +123,5 @@ const localStyle = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     marginHorizontal: 8,
-    marginVertical: 1
   }
 });
