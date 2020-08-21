@@ -12,9 +12,9 @@ export default {
               HomeScreen: 'home',
             },
           },
-          TabOne: {
+          Follow: {
             screens: {
-              TabOneScreen: 'one',
+              FollowScreen: 'follow',
             },
           },
           TabTwo: {

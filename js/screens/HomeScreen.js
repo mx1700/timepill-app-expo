@@ -6,7 +6,6 @@ import {
     Animated,
     Modal,
     TouchableWithoutFeedback,
-    DeviceEventEmitter,
 } from 'react-native';
 import {View, Text, Button} from '../components/Themed';
 //todo

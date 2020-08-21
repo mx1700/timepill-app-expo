@@ -9,9 +9,16 @@ import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
 // @ts-ignore
 import {MyScreen} from '../screens/UserScreen';
-import TabOneScreen from '../screens/TabOneScreen';
+// @ts-ignore
+import FollowScreen from '../screens/FollowScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import {BottomTabParamList, HomeParamList, MyParamList, TabOneParamList, TabTwoParamList} from '../types';
+import {
+  BottomTabParamList,
+  FollowParamList,
+  HomeParamList,
+  MyParamList,
+  TabTwoParamList
+} from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -35,7 +42,7 @@ export default function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="TabOne"
+        name="Follow"
         component={TabOneNavigator}
         options={{
           tabBarIcon: ({color}) => <TabBarIcon name="ios-code" color={color}/>,
@@ -96,15 +103,15 @@ function MyNavigator() {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const TabOneStack = createStackNavigator<FollowParamList>();
 
 function TabOneNavigator() {
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{headerTitle: 'Tab One Title'}}
+        name="FollowScreen"
+        component={FollowScreen}
+        options={{headerTitle: '关注'}}
       />
     </TabOneStack.Navigator>
   );
