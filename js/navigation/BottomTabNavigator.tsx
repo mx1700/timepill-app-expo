@@ -1,5 +1,6 @@
 import {Ionicons} from '@expo/vector-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import {createStackNavigator} from '@react-navigation/stack';
 import * as React from 'react';
 
@@ -21,6 +22,8 @@ import {
 } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+// createMaterialBottomTabNavigator android 上切换会闪烁
+// const BottomTab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
@@ -32,6 +35,7 @@ export default function BottomTabNavigator() {
         activeTintColor: Colors[colorScheme].tint,
         showLabel: false
       }}
+      // activeColor={Colors[colorScheme].tint}
     >
       <BottomTab.Screen
         name="Home"

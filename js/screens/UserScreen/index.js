@@ -47,6 +47,10 @@ export function UserScreen(props) {
 export function MyScreen({ navigation }) {
   useLayoutEffect(() => {
     navigation.setOptions({
+      headerStyle: {
+        shadowOpacity: 0,
+        elevation: 0,
+      },
       headerRight: () => (
         <HeadIcon name={"md-settings"} onPress={() => {console.log('111222')}} />
       ),
