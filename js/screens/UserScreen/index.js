@@ -30,6 +30,10 @@ export function UserScreen(props) {
     console.log('relation', rel, typeof rel)
     if(relLoading && !relError) {
       navigation.setOptions({
+        headerStyle: {
+          shadowOpacity: 0,
+          elevation: 0,
+        },
         headerRight: () => (
           <HeadIcon name={"md-settings"} onPress={() => {console.log('111222')}} />
         ),

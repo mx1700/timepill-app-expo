@@ -130,8 +130,9 @@ const localStyle = StyleSheet.create({
         alignItems: 'center',
     },
     followButton: {
-        width: 90,
-        height: 32,
+        width: 95,
+        height: 35,
+        paddingBottom: 12,
         marginTop: 30,
         marginBottom: 2,    //修复底部少1px问题
     },
