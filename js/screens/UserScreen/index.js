@@ -88,8 +88,8 @@ function UserTab(props) {
 }
 
 function Intro() {
-  const {user} = useContext(UserContext);
-  return <UserIntro user={user}/>
+  const {user, isSelf} = useContext(UserContext);
+  return <UserIntro user={user} isSelf={isSelf}/>
 }
 
 function UserDiaries() {

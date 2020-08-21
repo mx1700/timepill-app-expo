@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, ScrollView, InteractionManager} from 'react-native';
 import moment from 'moment';
-import {View, Text, Container} from '../../components/Themed';
+import {View, Text, Container, Button} from '../../components/Themed';
 
 import Color from '../../constants/Colors';
 import Api from '../../util/api';
@@ -17,38 +17,55 @@ export default class UserIntro extends Component {
 
         this.state = {
             user: props.user,
-            isLoading: true
+            followed: 0,
+            isLoading: false
         };
     }
 
     componentDidMount() {
-        console.log("UserIntro componentDidMount")
-        Api.getSelfInfoByStore()
-            .then(user => {
-                this.selfInfo = user;
+        InteractionManager.runAfterInteractions(() => {
+            this.refresh();
+        });
+    }
 
-                InteractionManager.runAfterInteractions(() => {
-                    this.refresh();
-                });
-            });
+    _onAddFollow() {
+        Api.addFollow(this.state.user.id)
+          .then(() => {
+              this.setState({
+                  followed: 1
+              });
+
+              alert('已关注');
+          })
+          .catch(e => {
+              alert('关注失败');
+          })
+    }
+
+    _onDeleteFollow() {
+        Api.deleteFollow(this.state.user.id)
+          .then(() => {
+              this.setState({
+                  followed: -1,
+              });
+
+              alert('已取消关注');
+          })
+          .catch(e => {
+              alert('取消关注失败');
+          })
     }
 
     refresh() {
-        let userId = this.state.user ? this.state.user.id : this.selfInfo.id;
-        Api.getUserInfo(userId)
-            .then(user => {
-                this.setState({
-                    user: user
-                });
-            })
-            .catch(e => {
-                Msg.showMsg('用户信息加载失败');
-            })
-            .finally(() => {
-                this.setState({
-                    isLoading: false
-                })
-            });
+        if (!this.props.isSelf) {
+            Api.getRelation(this.state.user.id)
+              .then(re => {
+                  const followed = re ? 1 : -1;
+                  this.setState({
+                      followed: followed
+                  });
+              });
+        }
     }
 
     render() {
@@ -57,11 +74,32 @@ export default class UserIntro extends Component {
         }
 
         const user = this.state.user;
+        const followed = this.state.followed;
+
         return user ? (
           <Container style={localStyle.container}>
             <ScrollView automaticallyAdjustContentInsets={false}>
                 <View style={localStyle.userIcon}>
                     <UserIcon width={90} height={90} iconUrl={user.coverUrl} />
+                    {
+                        followed < 0
+                          ? <Button title="+关注"
+                                    type="outline"
+                                    buttonStyle={localStyle.followButton}
+                                    onPress={this._onAddFollow.bind(this)}
+                                    titleStyle={{fontSize: 15}}
+                          />
+                          : (
+                            followed > 0
+                              ? <Button title="取消关注"
+                                        outline={true}
+                                        buttonStyle={localStyle.followButton}
+                                        onPress={this._onDeleteFollow.bind(this)}
+                                        titleStyle={{fontSize: 15}}
+                              />
+                              : null
+                          )
+                    }
                     <Text style={localStyle.userTitle}>{user.name}</Text>
                 </View>
 
@@ -85,13 +123,22 @@ const localStyle = StyleSheet.create({
         flex: 1,
     },
     userIcon: {
-        height: 230,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    followButton: {
+        width: 90,
+        height: 32,
+        marginTop: 20,
+        marginRight: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     userTitle: {
         fontSize: 22,
         marginTop: 30,
+        marginRight: 3,
         fontWeight: 'bold',
     },
     introText: {

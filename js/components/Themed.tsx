@@ -72,13 +72,14 @@ export function Input(props: ThemeProps & DefaultInput['props']) {
 }
 
 export function Button(props: ThemeProps & DefaultButton['props']) {
-  const { style, lightColor, darkColor, buttonStyle, ...otherProps } = props;
-  props.onPress
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'primary');
+  const {style, lightColor, darkColor, buttonStyle, type, ...otherProps} = props;
+  const color = useThemeColor({light: lightColor, dark: darkColor}, 'primary');
 
+  const colorStyle = type != 'outline' ? {backgroundColor: color} : {borderColor: color}
   return (<DefaultButton
     style={style}
-    buttonStyle={[{backgroundColor:color}, localStyle.button, buttonStyle]}
+    type={type}
+    buttonStyle={[colorStyle, localStyle.button, buttonStyle]}
     {...otherProps}
   />);
 }
