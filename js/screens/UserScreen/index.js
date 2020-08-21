@@ -1,6 +1,6 @@
-import React, {Component, useContext, useEffect} from 'react';
+import React, {Component, useContext, useEffect, useLayoutEffect} from 'react';
 import {StyleSheet, Animated, DeviceEventEmitter, Alert} from 'react-native';
-import {View, Text, Button, Container} from '../../components/Themed';
+import {View, Text, Button, Container, Ionicons, HeadIcon} from '../../components/Themed';
 import Api from '../../util/api';
 
 import UserIntro from './userIntro';
@@ -18,16 +18,37 @@ export function UserScreen(props) {
   const {navigation} = props;
 
   const [loading, error, user] = useApi(Api.getUserInfo, uid);
-  useEffect(() => {
+  const [relLoading, relError, rel] = useApi(Api.getRelation, uid);
+
+  useLayoutEffect(() => {
     if(user) {
       navigation.setOptions({ title: user.name })
     }
   }, [user])
 
+  useLayoutEffect(() => {
+    console.log('relation', rel, typeof rel)
+    if(relLoading && !relError) {
+      navigation.setOptions({
+        headerRight: () => (
+          <HeadIcon name={"md-settings"} onPress={() => {console.log('111222')}} />
+        ),
+      });
+    }
+  }, [relLoading, relError, rel])
+
   return <UserTab user={user} isSelf={false} loading={loading} error={error} />
 }
 
-export function MyScreen() {
+export function MyScreen({ navigation }) {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeadIcon name={"md-settings"} onPress={() => {console.log('111222')}} />
+      ),
+    });
+  }, [navigation]);
+
   const [loading, error, user] = useApi(Api.getSelfInfoByStore);
   return <UserTab user={user} isSelf={true} loading={loading} error={error} />
 }
@@ -45,7 +66,7 @@ function UserTab(props) {
     [user]
   );
   if (loading) {
-    return <Text>loading</Text>
+    return null
   }
 
   if (error) {

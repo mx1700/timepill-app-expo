@@ -12,6 +12,8 @@ import { Fontisto as DefaultFontisto } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import {IconProps} from "@expo/vector-icons/build/createIconSet";
+// @ts-ignore
+import Touchable from './touchable';
 
 export function useThemeColor(
   props: { light?: string; dark?: string },
@@ -71,6 +73,7 @@ export function Input(props: ThemeProps & DefaultInput['props']) {
 
 export function Button(props: ThemeProps & DefaultButton['props']) {
   const { style, lightColor, darkColor, buttonStyle, ...otherProps } = props;
+  props.onPress
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'primary');
 
   return (<DefaultButton
@@ -91,6 +94,14 @@ export function Fontisto(props: ThemeProps & IconProps<string>) {
   const { lightColor, darkColor, ...otherProps } = props;
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
   return (<DefaultFontisto color={color} {...otherProps} />)
+}
+
+export function HeadIcon(props: ThemeProps & IconProps<string>) {
+  const { lightColor, darkColor, ...otherProps } = props;
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  return (
+      <Ionicons size={24} color={color} style={{paddingVertical: 10, paddingHorizontal: 16}} {...otherProps}/>
+    )
 }
 
 export function ActivityIndicator(props: ThemeProps & DefaultActivityIndicator['props']) {
