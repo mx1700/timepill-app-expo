@@ -238,7 +238,7 @@ class DiaryList extends Component {
           refreshing={this.state.refreshing}
           onRefresh={this.refresh.bind(this)}
 
-          onEndReachedThreshold={0.2}
+          onEndReachedThreshold={2}
           onEndReached={this.state.hasMore ? this.loadMore.bind(this) : null}
 
           onScroll={(event) => {

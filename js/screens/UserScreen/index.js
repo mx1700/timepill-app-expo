@@ -58,7 +58,7 @@ export function MyScreen({ navigation }) {
   }, [navigation]);
 
   const [loading, error, user] = useApi(Api.getSelfInfoByStore);
-  return <UserTab user={user} isSelf={true} loading={loading} error={error} />
+  return <UserTab user={user} isSelf={true} loading={loading} error={error} initialRouteName={"Diary"}/>
 }
 
 function UserTab(props) {
@@ -83,7 +83,7 @@ function UserTab(props) {
 
   return (
       <UserContext.Provider value={userContext}>
-        <Tab.Navigator backBehavior={"none"} style={{flex: 1, height: 1}}>
+        <Tab.Navigator backBehavior={"none"} style={{flex: 1, height: 1}} initialRouteName={props.initialRouteName}>
           <Tab.Screen name="Intro" component={Intro}
                       options={{tabBarLabel: '简介'}}/>
           <Tab.Screen name="Diary" component={UserDiaries}
