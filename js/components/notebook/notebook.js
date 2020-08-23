@@ -88,10 +88,10 @@ const localStyle = StyleSheet.create({
         justifyContent: 'center',
         padding: 5,
         height: 55,
-        textAlign: 'center',
-        fontWeight: 'bold',
-        color: Color.light.text,
-        fontSize: 14
+        // textAlign: 'center',
+        // fontWeight: 'bold',
+        // color: Color.light.text,
+        // fontSize: 14
     },
     desc: {
         fontSize: 10,

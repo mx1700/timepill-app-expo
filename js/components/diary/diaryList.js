@@ -75,6 +75,7 @@ class DiaryList extends Component {
     //     }
     // });
     this.navigation.push("Diary", {
+      id: diary.id,
       diary: diary,
       user: diary.user,
       showField: this.props.showField,
@@ -238,6 +239,7 @@ class DiaryList extends Component {
           refreshing={this.state.refreshing}
           onRefresh={this.refresh.bind(this)}
 
+          initialNumToRender={10}
           onEndReachedThreshold={2}
           onEndReached={this.state.hasMore ? this.loadMore.bind(this) : null}
 

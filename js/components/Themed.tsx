@@ -48,7 +48,7 @@ export function Container(props: ViewProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
-  return <DefaultView style={[{ backgroundColor, flex: 1 }, style]} {...otherProps} />;
+  return <DefaultView style={[{ backgroundColor, flex: 1, height: 1 }, style]} {...otherProps} />;
 }
 
 export function View(props: ViewProps) {

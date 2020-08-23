@@ -44,8 +44,8 @@ export default {
           Notebook: "notebook"
         }
       },
-      Login: 'login',
-      Diary: 'diary',
+      Login: "login",
+      Diary: "diaries/:id",
       Photo: 'photo',
       NotFound: '*',
     },

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {
     StyleSheet,
-    Text,
-    View,
     ActivityIndicator,
     TextInput,
     TouchableOpacity,
@@ -10,11 +8,11 @@ import {
     DeviceEventEmitter,
     Platform,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import KeyboardSpacer from "react-native-keyboard-spacer";
+import {View, Text, Button} from '../Themed';
 
-import Touchable from '../touchable';
-import Color from '../../style/color';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+import Color from '../../constants/Colors';
 import Api from '../../util/api';
 import Event from '../../util/event';
 
@@ -189,7 +187,6 @@ export default class CommentInput extends Component {
 const localStyle = StyleSheet.create({
     container: {
         height: 56,
-        backgroundColor: Color.navBackground,
         elevation: 3,
         borderColor: '#bbb',
         borderTopWidth: StyleSheet.hairlineWidth

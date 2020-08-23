@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
+import {StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
+import {View, Text, Button} from '../Themed';
 
 import Color from '../../constants/Colors';
 import UserIcon from '../userIcon';
@@ -37,7 +38,7 @@ export default class Comment extends Component {
         return (
             <View style={bgActive}>
                 <View style={localStyle.box}>
-                    <UserIcon iconUrl={user.iconUrl} onPress={this.props.onUserIconPress}/>
+                    <UserIcon iconUrl={user.iconUrl} style={localStyle.userIcon} onPress={this.props.onUserIconPress}/>
 
                     <View style={localStyle.body}>
                         <View style={localStyle.title}>
@@ -65,8 +66,6 @@ export default class Comment extends Component {
                     : null
                 }
 
-                <View style={localStyle.line}/>
-
             </View>
         );
     }
@@ -92,26 +91,23 @@ const localStyle = StyleSheet.create({
     titleName: {
         flexGrow: 1,
         fontWeight: 'bold',
-        color: Color.text,
         fontSize: 14,
         marginRight: 5
     },
     titleText: {
         fontSize: 12,
-        color: Color.inactiveText,
         paddingRight: 10
     },
     content: {
         flexGrow: 1,
         lineHeight: 26,
-        color: Color.text,
         fontSize: 15,
         paddingRight: 5,
         marginBottom: 10
     },
     line: {
         height: StyleSheet.hairlineWidth,
-        backgroundColor: Color.line,
+        backgroundColor: Color.light.divider,
         marginHorizontal: 16,
         marginLeft: 56
     },
@@ -121,5 +117,9 @@ const localStyle = StyleSheet.create({
         right: 15,
         paddingHorizontal: 12,
         paddingVertical: 5
+    },
+    userIcon: {
+        marginTop: 3,
+        marginRight: 8,
     }
 });
