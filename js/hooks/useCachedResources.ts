@@ -16,9 +16,6 @@ export default function useCachedResources(): [boolean, boolean, Dispatch<SetSta
         SplashScreen.preventAutoHideAsync();
 
         // Load fonts
-        console.log({
-          ...Fontisto.font
-        })
         await Font.loadAsync({
           ...Ionicons.font,
           ...Fontisto.font,
