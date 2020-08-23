@@ -3,7 +3,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import * as React from 'react';
 // @ts-ignore
-import Token from '../util/token'
+import Token from '../util/Token'
 import {Dispatch, SetStateAction} from "react";
 
 export default function useCachedResources(): [boolean, boolean, Dispatch<SetStateAction<boolean>>] {

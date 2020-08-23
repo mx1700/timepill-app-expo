@@ -83,15 +83,9 @@ class DiaryList extends Component {
   }
 
   _onPhotoPress = (photoUrl) => {
-    //todo
-    Navigation.push(this.props.componentId, {
-      component: {
-        name: 'Photo',
-        passProps: {
-          url: photoUrl
-        }
-      }
-    });
+    this.navigation.push("Photo", {
+      url: photoUrl
+    })
   }
 
   refreshOne(index, diary) {

@@ -2,19 +2,21 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { ColorSchemeName } from 'react-native-appearance';
+import {useContext} from "react";
+import AuthContext from "../util/AuthContext";
 
-import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
+import NotFoundScreen from '../screens/NotFoundScreen';
 // @ts-ignore
 import {UserScreen} from "../screens/UserScreen";
 // @ts-ignore
 import DiaryScreen from "../screens/DiaryScreen";
 // @ts-ignore
 import AuthScreen from "../screens/AuthScreen"
-import {useContext} from "react";
-import AuthContext from "../util/AuthContext";
+// @ts-ignore
+import PhotoScreen from "../screens/PhotoScreen"
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -47,6 +49,7 @@ function RootNavigator() {
           <Stack.Screen name="Root" component={BottomTabNavigator} options={{headerShown: false}}/>
           <Stack.Screen name="User" component={UserScreen} options={({ route }) => ({ title: route.params.name })} initialParams={{id: "0"}}/>
           <Stack.Screen name="Diary" component={DiaryScreen} options={{title: 'Oops!'}}/>
+          <Stack.Screen name="Photo" component={PhotoScreen} options={{title: '照片'}}/>
           <Stack.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
         </>
       ):(

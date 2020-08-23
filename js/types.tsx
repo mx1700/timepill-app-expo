@@ -7,6 +7,7 @@ export type RootStackParamList = {
   User: { id?: string, name?: string };
   Login: undefined;
   Diary: undefined;
+  Photo: { url: String }
 };
 
 /**

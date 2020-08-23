@@ -2,7 +2,7 @@ import * as Linking from 'expo-linking';
 
 export default {
   // prefixes: [Linking.makeUrl('/')],
-  prefixes: ['timepill://', 'http://localhost', 'http://timepill.net'],
+  prefixes: ['timepill://', 'http://localhost', 'https://timepill.net'],
   config: {
     screens: {
       Root: {
@@ -46,6 +46,7 @@ export default {
       },
       Login: 'login',
       Diary: 'diary',
+      Photo: 'photo',
       NotFound: '*',
     },
   },
