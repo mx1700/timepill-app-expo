@@ -4,7 +4,7 @@ import {Platform, Dimensions} from 'react-native'
 import * as Device from 'expo-device';
 import Constants from 'expo-constants';
 
-import Token from './token'
+import Token from './Token'
 
 
 const IS_ANDROID = Device.osName === 'Android';
