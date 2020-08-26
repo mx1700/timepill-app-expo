@@ -62,7 +62,7 @@ export default class DiaryDetailPage extends Component {
     // Navigation.events().bindComponent(this);
 
     console.log(props)
-    const diaryId = props.id || 1;
+    const diaryId = props.id || props.route.params.id;
 
     this.state = {
       selfInfo: null,

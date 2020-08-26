@@ -139,8 +139,9 @@ class DiaryList extends Component {
     });
   }
 
-  async loadMore() {
-    if (this.state.loadingMore) {
+  loadMore = async() => {
+    console.log("load more.....");
+    if (this.state.loadingMore || !this.state.hasMore) {
       return;
     }
 
@@ -226,7 +227,7 @@ class DiaryList extends Component {
             }
 
             if (this.state.loadFailed) {
-              return <ListFooterFailed refresh={this.loadMore.bind(this)}/>;
+              return <ListFooterFailed refresh={this.loadMore}/>;
             }
 
             if (!this.state.hasMore) {
@@ -241,7 +242,7 @@ class DiaryList extends Component {
 
           initialNumToRender={10}
           onEndReachedThreshold={2}
-          onEndReached={this.state.hasMore ? this.loadMore.bind(this) : null}
+          onEndReached={this.loadMore}
 
           onScroll={(event) => {
             this.scrollY = event.nativeEvent.contentOffset.y;

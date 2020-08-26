@@ -2,7 +2,7 @@ import * as Linking from 'expo-linking';
 
 export default {
   // prefixes: [Linking.makeUrl('/')],
-  prefixes: ['timepill://', 'http://localhost', 'https://timepill.net'],
+  prefixes: ['timepill://', 'https://timepill.net'],
   config: {
     screens: {
       Root: {
@@ -24,12 +24,12 @@ export default {
           },
           My: {
             screens: {
-              // MyScreen: 'my',
               MyScreen: {
+                path: 'my',
                 screens: {
-                  Intro: "my/intro",
-                  Diary: "my/diary",
-                  Notebook: "my/notebook"
+                  Intro: "intro",
+                  Diary: "diary",
+                  Notebook: "notebook"
                 }
               },
             },
@@ -45,7 +45,7 @@ export default {
         }
       },
       Login: "login",
-      Diary: "diaries/:id",
+      Diary: "diaries/:id/detail",  //必须在id参数后边再增加一层目录,否则在页面刷新的时候id会丢失,原因不明
       Photo: 'photo',
       NotFound: '*',
     },
