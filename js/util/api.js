@@ -435,26 +435,32 @@ async function upload(method, api, body) {
 
 async function call(method, api, body = null, _timeout = 10000) {
     let token = await Token.getUserToken();
-    return timeout(fetch(baseUrl + api, {
-            method: method,
-            headers: {
-                'Authorization': token,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-TP-OS': OS,
-                'X-TP-OS-Version': OS_VERSION,
-                'X-TP-Version': VERSION,
-                'X-Device-ID': DEVICE_ID,
-            },
-            body: body ? JSON.stringify(body) : null
-        })
-        .then(checkStatus)
-        .then(parseJSON)
-        .catch((err) => {
-            err.message += ' api:' + api;
-            handleCatch(err);
-        })
-    , _timeout);
+    const controller = new AbortController();
+    const signal = controller.signal;
+    //todo abort 未完成
+
+    const f = fetch(baseUrl + api, {
+        method: method,
+        headers: {
+            'Authorization': token,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-TP-OS': OS,
+            'X-TP-OS-Version': OS_VERSION,
+            'X-TP-Version': VERSION,
+            'X-Device-ID': DEVICE_ID,
+        },
+        body: body ? JSON.stringify(body) : null,
+        signal
+    })
+      .then(checkStatus)
+      .then(parseJSON)
+      .catch((err) => {
+          err.message += ' api:' + api;
+          handleCatch(err);
+      });
+    const ret = timeout(f
+      , _timeout);
 }
 
 async function callV2(method, api, body = null, _timeout = 10000) {
