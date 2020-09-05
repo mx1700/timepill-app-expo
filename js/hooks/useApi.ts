@@ -2,10 +2,13 @@ import * as React from "react";
 
 type PromiseFunction<R> = (...args: any[]) => Promise<R>;
 
-export function usePromise<R, T extends PromiseFunction<R>>(fn: T, ...args: Parameters<T>): [boolean, string | null, R | null] {
+
+function usePromise<F extends (...args: any[]) => Promise<any>>(fn: F, ...args: Parameters<F>):
+  [boolean, string | null, ReturnType<F> extends Promise<infer R> ? R : never | null] {
+
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
-  const [data, setData] = React.useState<R | null>(null);
+  const [data, setData] = React.useState<any>(null);
 
   React.useEffect(() => {
     const f = async () => {
