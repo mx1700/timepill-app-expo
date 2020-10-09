@@ -47,6 +47,7 @@ export default {
       Login: "login",
       Diary: "diaries/:id/detail",  //必须在id参数后边再增加一层目录,否则在页面刷新的时候id会丢失,原因不明
       Photo: 'photo',
+      Write: 'write',
       NotFound: '*',
     },
   },

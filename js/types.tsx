@@ -7,7 +7,8 @@ export type RootStackParamList = {
   User: { id?: string, name?: string };
   Login: undefined;
   Diary: { id?: string };
-  Photo: { url: String }
+  Photo: { url: String };
+  Write: undefined;
 };
 
 /**
@@ -18,6 +19,7 @@ export type BottomTabParamList = {
   Follow: undefined;
   My: undefined;
   TabTwo: undefined;
+  Write: undefined;
 };
 
 export type HomeParamList = {

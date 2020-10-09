@@ -1,7 +1,7 @@
 import {Ionicons} from '@expo/vector-icons';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {BottomTabNavigationProp, createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
-import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator, StackNavigationProp} from '@react-navigation/stack';
 import * as React from 'react';
 
 import Colors from '../constants/Colors';
@@ -20,6 +20,8 @@ import {
   MyParamList,
   TabTwoParamList
 } from '../types';
+import {View} from "react-native";
+
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 // createMaterialBottomTabNavigator android 上切换会闪烁
@@ -35,6 +37,7 @@ export default function BottomTabNavigator() {
         activeTintColor: Colors[colorScheme].tint,
         showLabel: false
       }}
+      lazy={false}
       // activeColor={Colors[colorScheme].tint}
     >
       <BottomTab.Screen
@@ -42,14 +45,30 @@ export default function BottomTabNavigator() {
         component={HomeNavigator}
         options={{
           tabBarLabel: "首页",
-          tabBarIcon: ({color}) => <TabBarIcon name="ios-code" color={color}/>,
+          tabBarIcon: ({color}) => <TabBarIcon name="ios-home" color={color}/>,
         }}
       />
       <BottomTab.Screen
         name="Follow"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({color}) => <TabBarIcon name="ios-code" color={color}/>,
+          tabBarLabel: "关注",
+          tabBarIcon: ({color}) => <TabBarIcon name="ios-heart" color={color}/>,
+        }}
+      />
+      <BottomTab.Screen
+        name="Write"
+        component={WriteView}
+        options={{
+          tabBarLabel: "写日记",
+          tabBarIcon: ({color}) => <TabBarIcon name="ios-create" color={color}/>,
+        }}
+      />
+      <BottomTab.Screen
+        name="TabTwo"
+        component={TabTwoNavigator}
+        options={{
+          tabBarIcon: ({color}) => <TabBarIcon name="ios-notifications" color={color}/>,
         }}
       />
       <BottomTab.Screen
@@ -57,14 +76,7 @@ export default function BottomTabNavigator() {
         component={MyNavigator}
         options={{
           tabBarLabel: "我的",
-          tabBarIcon: ({color}) => <TabBarIcon name="ios-code" color={color}/>,
-        }}
-      />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
-        options={{
-          tabBarIcon: ({color}) => <TabBarIcon name="ios-code" color={color}/>,
+          tabBarIcon: ({color}) => <TabBarIcon name="ios-contact" color={color}/>,
         }}
       />
     </BottomTab.Navigator>
@@ -74,7 +86,27 @@ export default function BottomTabNavigator() {
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
 function TabBarIcon(props: { name: string; color: string }) {
-  return <Ionicons size={30} style={{marginBottom: -3}} {...props} />;
+  return <Ionicons size={26} style={{marginBottom: -3}} {...props} />;
+}
+
+function WriteView({ navigation }: any) {
+  React.useEffect(() => {
+    console.log("tabbar useEffect")
+    const current = navigation;
+    const unsubscribe = current.addListener('tabPress', (e: any) => {
+      // Prevent default behavior
+      e.preventDefault();
+      console.log("tabbar tabPress")
+      // Do something manually
+      // ...
+
+      navigation.push("Write");
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  return <View/>
 }
 
 const HomeStack = createStackNavigator<HomeParamList>();

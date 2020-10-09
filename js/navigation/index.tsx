@@ -17,6 +17,8 @@ import DiaryScreen from "../screens/DiaryScreen";
 import AuthScreen from "../screens/AuthScreen"
 // @ts-ignore
 import PhotoScreen from "../screens/PhotoScreen"
+// @ts-ignore
+import WriteScreen from "../screens/WriteScreen"
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -50,6 +52,7 @@ function RootNavigator() {
           <Stack.Screen name="User" component={UserScreen} options={({ route }) => ({ title: route.params.name || "" })} initialParams={{id: "0"}}/>
           <Stack.Screen name="Diary" component={DiaryScreen} options={{title: '日记详情'}}/>
           <Stack.Screen name="Photo" component={PhotoScreen} options={{title: '照片'}}/>
+          <Stack.Screen name="Write" component={WriteScreen} options={{title: '写日记'}}/>
           <Stack.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
         </>
       ):(
