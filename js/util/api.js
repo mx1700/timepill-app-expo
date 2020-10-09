@@ -461,6 +461,8 @@ async function call(method, api, body = null, _timeout = 10000) {
       });
     const ret = timeout(f
       , _timeout);
+
+    return ret;
 }
 
 async function callV2(method, api, body = null, _timeout = 10000) {
