@@ -33,15 +33,15 @@ export default class DiaryFull extends Component {
     return this.showField.indexOf(field) >= 0;
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      diary: nextProps.diary,
-      selfInfo: nextProps.selfInfo,
-
-      isMine: nextProps.isMine || false,
-      expired: nextProps.expired || false
-    });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     diary: nextProps.diary,
+  //     selfInfo: nextProps.selfInfo,
+  //
+  //     isMine: nextProps.isMine || false,
+  //     expired: nextProps.expired || false
+  //   });
+  // }
 
   async refreshComment() {
     await this.commentList.refresh();

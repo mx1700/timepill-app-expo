@@ -29,16 +29,16 @@ export default class DiaryIconOkB extends React.PureComponent {
         this.refreshBack = props.refreshBack || null;
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            diaryId: nextProps.diaryId || null,
-            count: nextProps.count || 0,
-            active: nextProps.active || false,
-            clickable: nextProps.clickable && true
-        });
-
-        this.refreshBack = nextProps.refreshBack || null;
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     this.setState({
+    //         diaryId: nextProps.diaryId || null,
+    //         count: nextProps.count || 0,
+    //         active: nextProps.active || false,
+    //         clickable: nextProps.clickable && true
+    //     });
+    //
+    //     this.refreshBack = nextProps.refreshBack || null;
+    // }
 
     onPress() {
         if(!this.state.clickable) {

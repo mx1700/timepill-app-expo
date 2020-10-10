@@ -138,7 +138,7 @@ export default class CommentInput extends Component {
         return (
             <View style={[localStyle.container, { height: this.state.inputHeight }]}>
                 <TextInput style={localStyle.input}
-                           selectionColor={Color.light}
+                           selectionColor={Color.light.primary}
 
                            ref="commentInput"
 

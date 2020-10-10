@@ -36,15 +36,15 @@ export default class CommentList extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      diaryId: nextProps.diaryId,
-      selfInfo: nextProps.selfInfo,
-
-      isMine: nextProps.isMine || false,
-      expired: nextProps.expired || false
-    });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     diaryId: nextProps.diaryId,
+  //     selfInfo: nextProps.selfInfo,
+  //
+  //     isMine: nextProps.isMine || false,
+  //     expired: nextProps.expired || false
+  //   });
+  // }
 
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
