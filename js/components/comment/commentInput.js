@@ -217,7 +217,7 @@ const localStyle = StyleSheet.create({
     button: {
         width: 32,
         height: 32,
-        backgroundColor: Color.light,
+        backgroundColor: Color.light.background,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 16
