@@ -1,4 +1,4 @@
-package com.timepill.generated;
+package com.timepill.diary.generated;
 
 import java.util.Arrays;
 import java.util.List;

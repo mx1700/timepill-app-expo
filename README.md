@@ -22,6 +22,7 @@ yarn run
 1. expo SecureStore
 1. https://github.com/expo/react-native-action-sheet
 1. https://github.com/expo/react-native-read-more-text
+1. react-native-reanimated-bottom-sheet
 
 ## 待解决问题
 - [x] 底部加载显示loading的问题

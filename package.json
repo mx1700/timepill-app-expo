@@ -22,6 +22,8 @@
     "expo-splash-screen": "^0.5.0",
     "expo-status-bar": "^1.0.0",
     "expo-updates": "~0.2.8",
+    "jcore-react-native": "^1.8.0",
+    "jpush-react-native": "^2.8.1",
     "moment": "^2.27.0",
     "react": "~16.11.0",
     "react-devtools-core": "^4.8.2",
